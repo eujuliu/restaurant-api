@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npx tsc",
+    "start": "node ./dist/src/infra/http/server.js",
     "dev": "tsnd --transpile-only -r tsconfig-paths/register ./src/infra/http/server.ts",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --passWithNoTests --watch",
     "test:staged": "jest --passWithNoTests --findRelatedTests",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commit": "cz"
   },
   "keywords": [],
   "author": "",

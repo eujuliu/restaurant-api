@@ -18,7 +18,7 @@ describe('Create a new user (entity)', () => {
   });
 
   it('Should be not able to create a user with an invalid email', () => {
-    const email: string = 'email.com';
+    const email = 'email.com';
     const userOrError = User.create({
       firstName: 'John',
       lastName: 'Doe',
