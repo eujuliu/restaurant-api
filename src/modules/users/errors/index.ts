@@ -16,9 +16,7 @@ export class InsecurePasswordError extends Error implements DomainError {
 
 export class AccountAlreadyExists extends Error implements DomainError {
   constructor(email: string) {
-    super(
-      `Already exists a user registered with email: ${email} already exists`
-    );
+    super(`Already exists a user registered with email: "${email}"`);
     this.name = 'AccountAlreadyExists';
   }
 }
