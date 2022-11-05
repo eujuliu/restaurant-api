@@ -13,17 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Start docker
+      - name: Start containers
         run: npm run docker:up
 
+      - name: Install node
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
           cache: 'npm'
       - run: npm ci
-      - run: npm test
-
-       - name: Stop docker
+      
+      - name: Run tests
+        run: npm run test
+      
+      - name: Stop containers
         if: always()
         run: npm run docker:down
       
