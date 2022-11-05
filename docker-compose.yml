@@ -1,0 +1,13 @@
+version: '2.4'
+
+services:
+  postgres_dev:
+    image: postgres:13
+    restart: always
+    container_name: postgres-dev
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: tests
