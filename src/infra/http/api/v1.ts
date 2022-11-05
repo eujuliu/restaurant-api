@@ -1,11 +1,8 @@
 import { Router } from 'express';
+import { userRouter } from 'modules/users/infra/http/routes';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.json({
-    message: 'Hello World!',
-  });
-});
+router.use(userRouter);
 
 export { router };

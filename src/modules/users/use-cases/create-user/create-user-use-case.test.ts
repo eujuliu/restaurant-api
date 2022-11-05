@@ -1,6 +1,6 @@
-import { AccountAlreadyExists } from '../errors';
-import { InMemoryUsersRepository } from '../repositories/in-memory/in-memory-users-repository';
-import { IUsersRepository } from '../repositories/users-repository';
+import { AccountAlreadyExists } from 'modules/users/domain/errors';
+import { InMemoryUsersRepository } from 'modules/users/repositories/in-memory/in-memory-users-repository';
+import { IUsersRepository } from 'modules/users/repositories/users-repository';
 import { CreateUserRequest, CreateUserUseCase } from './create-user-use-case';
 
 describe('Create a new user (use case)', () => {

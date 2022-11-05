@@ -1,5 +1,5 @@
 import { left } from 'core/logic/either';
-import { EmailInvalidError, InsecurePasswordError } from '../errors';
+import { EmailInvalidError, InsecurePasswordError } from './errors';
 import { User } from './user';
 
 describe('Create a new user (entity)', () => {

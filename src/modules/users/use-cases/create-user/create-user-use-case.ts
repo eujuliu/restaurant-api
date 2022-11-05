@@ -1,13 +1,13 @@
 import { UseCase } from 'core/domain/UseCase';
 import { UnexpectedError } from 'core/logic/app-error';
 import { Either, left, right } from 'core/logic/either';
-import { User } from '../domain/user';
+import { User } from 'modules/users/domain/user';
 import {
+  AccountAlreadyExists,
   EmailInvalidError,
   InsecurePasswordError,
-  AccountAlreadyExists,
-} from '../errors';
-import { IUsersRepository } from '../repositories/users-repository';
+} from 'modules/users/domain/errors';
+import { IUsersRepository } from 'modules/users/repositories/users-repository';
 
 export interface CreateUserRequest {
   firstName: string;

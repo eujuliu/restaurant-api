@@ -2,7 +2,7 @@ import { DomainError } from 'core/domain/errors/domain-error';
 
 export class EmailInvalidError extends Error implements DomainError {
   constructor(email: string) {
-    super(`The email "${email}" is invalid`);
+    super(`The email ${email} is invalid`);
     this.name = 'EmailInvalidError';
   }
 }
@@ -16,7 +16,7 @@ export class InsecurePasswordError extends Error implements DomainError {
 
 export class AccountAlreadyExists extends Error implements DomainError {
   constructor(email: string) {
-    super(`Already exists a user registered with email: "${email}"`);
+    super(`Already exists a user registered with email: ${email}`);
     this.name = 'AccountAlreadyExists';
   }
 }

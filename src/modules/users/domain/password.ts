@@ -1,7 +1,7 @@
 import { Either, left, right } from 'core/logic/either';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
-import { InsecurePasswordError } from '../errors';
+import { InsecurePasswordError } from './errors';
 
 interface PasswordProps {
   value: string;

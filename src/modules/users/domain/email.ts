@@ -1,6 +1,6 @@
 import { Either, left, right } from '../../../core/logic/either';
 import validator from 'validator';
-import { EmailInvalidError } from '../errors';
+import { EmailInvalidError } from './errors';
 
 export class Email {
   private readonly email: string;

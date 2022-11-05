@@ -2,7 +2,7 @@ import { Email } from './email';
 import { Password } from './password';
 import { v4 as uuid } from 'uuid';
 import { Either, left, right } from 'core/logic/either';
-import { EmailInvalidError, InsecurePasswordError } from '../errors';
+import { EmailInvalidError, InsecurePasswordError } from './errors';
 
 interface UserDataProps {
   firstName: string;
