@@ -7,17 +7,25 @@ on:
     branches: [ "main" ]
 
 jobs:
-  tests: 
+  tests:
     name: Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Start docker
+        run: npm run docker:up
+
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
           cache: 'npm'
       - run: npm ci
       - run: npm test
+
+       - name: Stop docker
+        if: always()
+        run: npm run docker:down
       
   commitlint:
     name: Lint Commits
