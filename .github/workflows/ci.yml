@@ -2,18 +2,18 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Start containers
         run: npm run docker:up
 
@@ -23,12 +23,24 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run test
-      
+
       - name: Stop containers
         if: always()
         run: npm run docker:down
-      
-  commitlint:
+
+  lint-styles:
+    name: Lint Styles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+
+  lint-commits:
     name: Lint Commits
     runs-on: ubuntu-latest
     steps:
