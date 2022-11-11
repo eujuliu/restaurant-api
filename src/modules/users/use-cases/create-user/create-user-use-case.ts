@@ -57,16 +57,16 @@ export class CreateUserUseCase
 
     const user: User = userOrError.value;
 
-    try {
-      await this.usersRepository.save({
-        ...user,
-        email: user.email.value,
-        password: await user.password.getHashedValue(),
-      });
+    await this.usersRepository.save({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email.value,
+      password: await user.password.getHashedValue(),
+      phone: user.phone,
+      emailIsVerified: user.emailIsVerified,
+    });
 
-      return right(`Welcome ${user.firstName}! Please confirm your email`);
-    } catch (err) {
-      return left(new InternalServerError({ message: (err as Error).message }));
-    }
+    return right(`Welcome ${user.firstName}! Please confirm your email`);
   }
 }

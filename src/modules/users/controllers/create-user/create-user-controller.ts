@@ -1,3 +1,4 @@
+import { InternalServerError } from 'core/domain/errors';
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from 'modules/users/use-cases/create-user/create-user-use-case';
 
@@ -25,16 +26,18 @@ export class CreateUserController {
       });
 
       if (responseOrError.isLeft()) {
-        return response.status(400).json(responseOrError.value);
+        return response
+          .status(responseOrError.value.statusCode)
+          .json(responseOrError.value);
       }
 
       return response.status(201).json({
         message: responseOrError.value,
       });
     } catch (err) {
-      return response.status(500).json({
-        err,
-      });
+      return response
+        .status(500)
+        .json(new InternalServerError({ message: (err as Error).message }));
     }
   }
 }
