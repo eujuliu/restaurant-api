@@ -13,7 +13,7 @@ export class InMemoryUsersRepository implements IUsersRepository {
   }
 
   async findUserByEmail(email: string): Promise<UserProps | null> {
-    const user = this.users.find((user) => user.email === email);
+    const user = this.users.filter((user) => user.email === email)[0];
 
     return user || null;
   }

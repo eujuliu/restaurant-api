@@ -1,13 +1,13 @@
 import { UseCase } from 'core/domain/UseCase';
-import { UnexpectedError } from 'core/logic/app-error';
 import { Either, left, right } from 'core/logic/either';
 import { User } from 'modules/users/domain/user';
 import {
-  AccountAlreadyExists,
+  AccountAlreadyExistsError,
   EmailInvalidError,
   InsecurePasswordError,
 } from 'modules/users/domain/errors';
 import { IUsersRepository } from 'modules/users/repositories/users-repository';
+import { InternalServerError } from 'core/domain/errors';
 
 export interface CreateUserRequest {
   firstName: string;
@@ -20,8 +20,8 @@ export interface CreateUserRequest {
 type CreateUserResponse = Either<
   | EmailInvalidError
   | InsecurePasswordError
-  | AccountAlreadyExists
-  | UnexpectedError,
+  | AccountAlreadyExistsError
+  | InternalServerError,
   string
 >;
 
@@ -39,7 +39,7 @@ export class CreateUserUseCase
     const userAlreadyExists = await this.usersRepository.exists(email);
 
     if (userAlreadyExists) {
-      return left(new AccountAlreadyExists(email));
+      return left(new AccountAlreadyExistsError({}));
     }
 
     const userOrError = User.create({
@@ -63,10 +63,10 @@ export class CreateUserUseCase
         email: user.email.value,
         password: await user.password.getHashedValue(),
       });
-    } catch (err) {
-      return left(new UnexpectedError(err));
-    }
 
-    return right(`Welcome ${user.firstName}! Please confirm your email`);
+      return right(`Welcome ${user.firstName}! Please confirm your email`);
+    } catch (err) {
+      return left(new InternalServerError({ message: (err as Error).message }));
+    }
   }
 }
