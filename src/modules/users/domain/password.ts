@@ -9,8 +9,7 @@ interface PasswordProps {
 }
 
 export class Password {
-  private props: PasswordProps;
-  constructor(props: PasswordProps) {
+  constructor(private props: PasswordProps) {
     this.props = props;
   }
 
@@ -27,11 +26,23 @@ export class Password {
         minNumbers: 1,
       })
     ) {
-      return left(new InsecurePasswordError());
+      return left(new InsecurePasswordError({}));
     }
     return right(
       new Password({ value: props.value, hashed: !!props.hashed === true })
     );
+  }
+
+  static comparePasswords(password: string, encrypted: string) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, encrypted, (err, result) => {
+        if (err) {
+          return reject(err);
+        }
+
+        resolve(result);
+      });
+    });
   }
 
   private async hashPassword(password: string): Promise<string> {

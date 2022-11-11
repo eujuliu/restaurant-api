@@ -15,7 +15,7 @@ export class Email {
 
   static create(email: string): Either<EmailInvalidError, Email> {
     if (!validator.isEmail(email)) {
-      return left(new EmailInvalidError(email));
+      return left(new EmailInvalidError({}));
     }
 
     return right(new Email(email));

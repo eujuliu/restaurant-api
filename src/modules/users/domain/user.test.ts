@@ -28,7 +28,7 @@ describe('Create a new user (entity)', () => {
       emailIsVerified: false,
     });
 
-    expect(userOrError).toStrictEqual(left(new EmailInvalidError(email)));
+    expect(userOrError).toStrictEqual(left(new EmailInvalidError({})));
   });
 
   it('Should be not able to create a user with an invalid password', () => {
@@ -41,6 +41,6 @@ describe('Create a new user (entity)', () => {
       emailIsVerified: false,
     });
 
-    expect(userOrError).toStrictEqual(left(new InsecurePasswordError()));
+    expect(userOrError).toStrictEqual(left(new InsecurePasswordError({})));
   });
 });
