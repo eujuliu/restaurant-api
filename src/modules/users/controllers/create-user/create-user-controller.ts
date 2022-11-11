@@ -1,4 +1,3 @@
-import { UnexpectedError } from 'core/logic/app-error';
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from 'modules/users/use-cases/create-user/create-user-use-case';
 
@@ -17,7 +16,7 @@ export class CreateUserController {
       await request.body;
 
     try {
-      const valueOrError = await this.createUserUseCase.execute({
+      const responseOrError = await this.createUserUseCase.execute({
         firstName,
         lastName,
         email,
@@ -25,18 +24,16 @@ export class CreateUserController {
         phone,
       });
 
-      if (valueOrError.isLeft()) {
-        return response.status(400).json({
-          error: valueOrError.value.message,
-        });
+      if (responseOrError.isLeft()) {
+        return response.status(400).json(responseOrError.value);
       }
 
       return response.status(201).json({
-        message: valueOrError.value,
+        message: responseOrError.value,
       });
     } catch (err) {
       return response.status(500).json({
-        error: new UnexpectedError(err),
+        err,
       });
     }
   }

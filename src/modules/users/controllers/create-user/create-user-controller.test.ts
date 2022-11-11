@@ -30,8 +30,8 @@ describe('Create user (controller)', () => {
     const response = await request(app).post('/users').send(userData);
 
     expect(response.status).toBe(400);
-    expect(response.body).toStrictEqual({
-      error: `Already exists a user registered with email: ${userData.email}`,
-    });
+    expect(response.body.message).toStrictEqual(
+      'Already exists a user registered with this email address'
+    );
   });
 });
