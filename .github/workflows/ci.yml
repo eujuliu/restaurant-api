@@ -13,6 +13,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Create env file
+        run: |
+          touch .env
+          echo ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }} >> .env
+          cat .env
 
       - name: Start containers
         run: npm run docker:up
@@ -27,7 +33,7 @@ jobs:
       - name: Stop containers
         if: always()
         run: npm run docker:down
-
+        
   lint-styles:
     name: Lint Styles
     runs-on: ubuntu-latest
