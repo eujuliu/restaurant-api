@@ -8,7 +8,7 @@ interface BaseErrorProps {
 }
 
 interface ErrorProps {
-  message: string;
+  message?: string;
   action?: string;
   statusCode?: number;
   errorId?: string;
@@ -36,6 +36,17 @@ export class InternalServerError extends BaseError {
       action: action || 'Please contact the support',
       errorId: errorId || uuid(),
       statusCode: statusCode || 500,
+    });
+  }
+}
+
+export class ValidationError extends BaseError {
+  constructor({ message, action, errorId, statusCode }: ErrorProps) {
+    super({
+      message: message || 'A validation error occurred',
+      action: action || 'Change the data and try again',
+      errorId: errorId || uuid(),
+      statusCode: statusCode || 400,
     });
   }
 }

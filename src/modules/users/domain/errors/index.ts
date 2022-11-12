@@ -41,25 +41,3 @@ export class AccountAlreadyExistsError extends BaseError {
     });
   }
 }
-
-export class AccountDoNotExistsError extends BaseError {
-  constructor({ message, action, errorId, statusCode }: ErrorProps) {
-    super({
-      message: message || `Don't exist a account registered with this email`,
-      action: action || 'Try to register a new account',
-      errorId: errorId || uuid(),
-      statusCode: statusCode || 404,
-    });
-  }
-}
-
-export class DataDoNotMatchError extends BaseError {
-  constructor({ message, action, errorId, statusCode }: ErrorProps) {
-    super({
-      message: message || `The email or password don't match`,
-      action: action || 'Try another email or password',
-      errorId: errorId || uuid(),
-      statusCode: statusCode || 400,
-    });
-  }
-}

@@ -2,7 +2,7 @@ import { InternalServerError } from 'core/domain/errors';
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from 'modules/users/use-cases/create-user/create-user-use-case';
 
-export interface BodyProps {
+export interface CreateUserBodyProps {
   firstName: string;
   lastName: string;
   email: string;
@@ -13,7 +13,7 @@ export interface BodyProps {
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
   async handle(request: Request, response: Response) {
-    const { firstName, lastName, email, password, phone }: BodyProps =
+    const { firstName, lastName, email, password, phone }: CreateUserBodyProps =
       await request.body;
 
     try {

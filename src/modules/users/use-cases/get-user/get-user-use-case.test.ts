@@ -1,7 +1,4 @@
-import {
-  AccountDoNotExistsError,
-  DataDoNotMatchError,
-} from 'modules/users/domain/errors';
+import { ValidationError } from 'core/domain/errors';
 import { InMemoryUsersRepository } from 'modules/users/repositories/in-memory/in-memory-users-repository';
 import { IUsersRepository } from 'modules/users/repositories/users-repository';
 import {
@@ -37,8 +34,7 @@ describe('Get user (use case)', () => {
       password: userData.password,
     });
 
-    expect(response.value).toHaveProperty('id');
-    expect(response.value).toHaveProperty('email');
+    expect(response.value).toHaveProperty('session_token');
   });
 
   it('Should return an error with the user email do not exist', async () => {
@@ -47,7 +43,7 @@ describe('Get user (use case)', () => {
       password: '@Test1234',
     });
 
-    expect(response.value).toStrictEqual(new AccountDoNotExistsError({}));
+    expect(response.value).toStrictEqual(new ValidationError({}));
   });
 
   it('Should return an error if password do not match', async () => {
@@ -58,6 +54,6 @@ describe('Get user (use case)', () => {
       password: '@Password123',
     });
 
-    expect(response.value).toStrictEqual(new DataDoNotMatchError({}));
+    expect(response.value).toStrictEqual(new ValidationError({}));
   });
 });

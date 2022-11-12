@@ -1,9 +1,9 @@
 import { app } from 'infra/http/app';
 import request from 'supertest';
-import { BodyProps } from './create-user-controller';
+import { CreateUserBodyProps } from './create-user-controller';
 
-describe('Create user (controller)', () => {
-  let userData: BodyProps;
+describe('POST /users (controller)', () => {
+  let userData: CreateUserBodyProps;
 
   beforeAll(() => {
     userData = {
