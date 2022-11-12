@@ -1,4 +1,4 @@
-import { InternalServerError, ValidationError } from 'core/domain/errors';
+import { ValidationError } from 'core/domain/errors';
 import { UseCase } from 'core/domain/UseCase';
 import { Either, left, right } from 'core/logic/either';
 import { Email } from 'modules/users/domain/email';
