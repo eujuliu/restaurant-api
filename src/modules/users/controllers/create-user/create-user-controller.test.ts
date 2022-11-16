@@ -11,7 +11,7 @@ describe('POST /register (controller)', () => {
       lastName: 'Doe',
       email: 'john@example.com',
       password: '@Test1234',
-      phone: '(111) 111-1111',
+      phone: '(11) 98888-8888',
     };
   });
 

@@ -8,7 +8,7 @@ describe('GET /login (controller)', () => {
       lastName: 'Doe',
       email: 'hanna@example.com',
       password: '@Test123',
-      phone: '(111) 111-1111',
+      phone: '(11) 98888-8888',
     });
 
     const response = await request(app).get('/login').send({

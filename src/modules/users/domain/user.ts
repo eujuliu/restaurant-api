@@ -1,8 +1,13 @@
+import { v4 as uuid } from 'uuid';
 import { Email } from './email';
 import { Password } from './password';
-import { v4 as uuid } from 'uuid';
+import { Phone } from './phone';
 import { Either, left, right } from 'core/logic/either';
-import { EmailInvalidError, InsecurePasswordError } from './errors';
+import {
+  EmailInvalidError,
+  InsecurePasswordError,
+  PhoneInvalidError,
+} from './errors';
 
 interface UserDataProps {
   firstName: string;
@@ -19,7 +24,7 @@ export class User {
   lastName: string;
   email: Email;
   password: Password;
-  phone: string;
+  phone: Phone;
   emailIsVerified: boolean;
 
   constructor({
@@ -48,10 +53,14 @@ export class User {
     password,
     phone,
     emailIsVerified,
-  }: UserDataProps): Either<EmailInvalidError | InsecurePasswordError, User> {
+  }: UserDataProps): Either<
+    EmailInvalidError | InsecurePasswordError | PhoneInvalidError,
+    User
+  > {
     const emailOrError: Either<EmailInvalidError, Email> = Email.create(email);
     const passwordOrError: Either<InsecurePasswordError, Password> =
       Password.create({ value: password });
+    const phoneOrError: Either<PhoneInvalidError, Phone> = Phone.create(phone);
 
     if (emailOrError.isLeft()) {
       return left(emailOrError.value);
@@ -61,13 +70,17 @@ export class User {
       return left(passwordOrError.value);
     }
 
+    if (phoneOrError.isLeft()) {
+      return left(phoneOrError.value);
+    }
+
     return right(
       new User({
         firstName,
         lastName,
         email: emailOrError.value,
         password: passwordOrError.value,
-        phone,
+        phone: phoneOrError.value,
         emailIsVerified,
       })
     );

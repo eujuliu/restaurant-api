@@ -12,7 +12,18 @@ export class EmailInvalidError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
       message: message || `This email is not valid.`,
-      action: action || 'Try another email address',
+      action: action || 'Verify the data and try again',
+      errorId: errorId || uuid(),
+      statusCode: statusCode || 400,
+    });
+  }
+}
+
+export class PhoneInvalidError extends BaseError {
+  constructor({ message, action, errorId, statusCode }: ErrorProps) {
+    super({
+      message: message || `This phone number is not valid.`,
+      action: action || 'Verify the data and try again',
       errorId: errorId || uuid(),
       statusCode: statusCode || 400,
     });

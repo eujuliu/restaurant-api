@@ -16,7 +16,7 @@ describe('Create a new user (use case)', () => {
       lastName: 'Doe',
       email: 'john@example.com',
       password: '@Test123',
-      phone: '(111) 111-1111',
+      phone: '(13) 99726-5451',
     };
   });
 

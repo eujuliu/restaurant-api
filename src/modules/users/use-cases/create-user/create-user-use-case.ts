@@ -63,7 +63,7 @@ export class CreateUserUseCase
       lastName: user.lastName,
       email: user.email.value,
       password: await user.password.getHashedValue(),
-      phone: user.phone,
+      phone: user.phone.value,
       emailIsVerified: user.emailIsVerified,
     });
 

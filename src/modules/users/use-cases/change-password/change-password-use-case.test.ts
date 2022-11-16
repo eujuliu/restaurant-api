@@ -25,7 +25,7 @@ describe('Change password (use case)', () => {
       lastName: 'Doe',
       email: 'jonathan@example.com',
       password: '@Test123',
-      phone: '(111) 111-1111',
+      phone: '(11) 98888-8888',
     };
   });
 
