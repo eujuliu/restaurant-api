@@ -12,9 +12,9 @@ describe('Create a new user (use case)', () => {
     usersRepository = new InMemoryUsersRepository();
     createUserUseCase = new CreateUserUseCase(usersRepository);
     userData = {
-      firstName: 'Hanna',
+      firstName: 'John',
       lastName: 'Doe',
-      email: 'hanna@example.com',
+      email: 'john@example.com',
       password: '@Test123',
       phone: '(111) 111-1111',
     };

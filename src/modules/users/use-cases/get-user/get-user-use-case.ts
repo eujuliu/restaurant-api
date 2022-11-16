@@ -12,10 +12,7 @@ interface GetUserRequest {
   password: string;
 }
 
-type GetUserResponse = Either<
-  ValidationError,
-  EmailInvalidError | { session_token: string }
->;
+type GetUserResponse = Either<ValidationError, EmailInvalidError | string>;
 
 export class GetUserUseCase
   implements UseCase<GetUserRequest, GetUserResponse>
@@ -47,6 +44,6 @@ export class GetUserUseCase
 
     const token = generateJsonWebToken(user.id, user.email);
 
-    return right({ session_token: token });
+    return right(token);
   }
 }

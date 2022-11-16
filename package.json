@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "start": "node ./dist/src/infra/http/server.js",
     "dev": "tsnd --transpile-only --exit-child -r tsconfig-paths/register ./src/infra/http/server.ts",
-    "test": "dotenv -e .env.test npx prisma migrate deploy && dotenv -e .env.test jest -i",
+    "test": "dotenv -e .env.test npx prisma migrate deploy && dotenv -e .env.test jest --passWithNoTests",
     "test:watch": "dotenv -e .env.test npx prisma migrate deploy && dotenv -e .env.test jest --passWithNoTests --watch",
     "prepare": "husky install",
     "commit": "cz",

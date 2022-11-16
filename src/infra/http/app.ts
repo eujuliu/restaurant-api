@@ -4,7 +4,7 @@ import { router } from './api/v1';
 
 const app = express();
 app.use(express.json());
-app.use(router);
 app.use(cookieParser());
+app.use(router);
 
 export { app };

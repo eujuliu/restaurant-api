@@ -17,4 +17,12 @@ export class InMemoryUsersRepository implements IUsersRepository {
 
     return user || null;
   }
+
+  async updatePassword(email: string, newPassword: string): Promise<void> {
+    this.users.map((user) => {
+      if (user.email === email) {
+        return (user.password = newPassword);
+      }
+    });
+  }
 }

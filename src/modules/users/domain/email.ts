@@ -18,6 +18,8 @@ export class Email {
       return left(new EmailInvalidError({}));
     }
 
-    return right(new Email(email));
+    const normalizedEmail = validator.normalizeEmail(email) as string;
+
+    return right(new Email(normalizedEmail));
   }
 }

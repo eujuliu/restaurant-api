@@ -41,3 +41,14 @@ export class AccountAlreadyExistsError extends BaseError {
     });
   }
 }
+
+export class PasswordsDoesNotMatchError extends BaseError {
+  constructor({ message, action, errorId, statusCode }: ErrorProps) {
+    super({
+      message: message || 'Passwords does not match',
+      action: action || 'Re-write the passwords and try again',
+      errorId: errorId || uuid(),
+      statusCode: statusCode || 400,
+    });
+  }
+}

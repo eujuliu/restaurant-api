@@ -2,7 +2,7 @@ import { app } from 'infra/http/app';
 import request from 'supertest';
 import { CreateUserBodyProps } from './create-user-controller';
 
-describe('POST /users (controller)', () => {
+describe('POST /register (controller)', () => {
   let userData: CreateUserBodyProps;
 
   beforeAll(() => {
@@ -16,7 +16,7 @@ describe('POST /users (controller)', () => {
   });
 
   it('Should be able to create a new user', async () => {
-    const response = await request(app).post('/users').send(userData);
+    const response = await request(app).post('/register').send(userData);
 
     expect(response.status).toBe(201);
     expect(response.body).toStrictEqual({
@@ -25,9 +25,9 @@ describe('POST /users (controller)', () => {
   });
 
   it('Should be not able to create a existing user', async () => {
-    await request(app).post('/users').send(userData);
+    await request(app).post('/register').send(userData);
 
-    const response = await request(app).post('/users').send(userData);
+    const response = await request(app).post('/register').send(userData);
 
     expect(response.status).toBe(400);
     expect(response.body.message).toStrictEqual(

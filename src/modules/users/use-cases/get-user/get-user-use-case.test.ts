@@ -20,7 +20,7 @@ describe('Get user (use case)', () => {
     userData = {
       firstName: 'Hanna',
       lastName: 'Doe',
-      email: 'john@example.com',
+      email: 'hanna@example.com',
       password: '@Test123',
       phone: '(111) 111-1111',
     };
@@ -34,10 +34,10 @@ describe('Get user (use case)', () => {
       password: userData.password,
     });
 
-    expect(response.value).toHaveProperty('session_token');
+    expect(response).toHaveProperty('value');
   });
 
-  it('Should return an error with the user email do not exist', async () => {
+  it('Should be not able to return a user when email does not exist', async () => {
     const response = await getUserUseCase.execute({
       email: 'test@example.com',
       password: '@Test1234',
@@ -46,7 +46,7 @@ describe('Get user (use case)', () => {
     expect(response.value).toStrictEqual(new ValidationError({}));
   });
 
-  it('Should return an error if password do not match', async () => {
+  it('Should be not able to return a user when password is wrong', async () => {
     await createUserUseCase.execute(userData);
 
     const response = await getUserUseCase.execute({
