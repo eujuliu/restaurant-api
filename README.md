@@ -14,6 +14,7 @@
     - [ ] can pay for the product or cancel the open order
     - [ ] can see your own orders
     - [ ] can confirm the delivery of an order
+    - [ ] receive in realtime if the order was accepted or rejected
   - [ ] Products
     - [ ] can see all available products
 

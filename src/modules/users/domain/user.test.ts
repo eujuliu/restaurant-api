@@ -53,7 +53,7 @@ describe('Create a new user (entity)', () => {
       lastName: 'Doe',
       email: 'alex@example.com',
       password: '@Test123',
-      phone: '(11) 98888-888',
+      phone: '(11) 8888-888',
       emailIsVerified: false,
     });
 

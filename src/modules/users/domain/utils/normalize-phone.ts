@@ -1,9 +1,6 @@
 export function normalizePhone(countryCode: number, phone: string) {
-  phone = phone.replace('(', '');
-  phone = phone.replace(')', '');
-  phone = phone.replace('-', '');
-  phone = phone.replace(' ', '');
-  phone = phone.replace(`+${countryCode}`, '');
+  const regex = /\d+/g;
+  const onlyNumbers = phone.match(regex)?.join('');
 
-  return `+${countryCode}${phone}`;
+  return `+${countryCode}${onlyNumbers}`;
 }
