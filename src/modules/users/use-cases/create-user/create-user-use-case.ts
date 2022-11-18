@@ -8,6 +8,7 @@ import {
 } from 'modules/users/domain/errors';
 import { IUsersRepository } from 'modules/users/repositories/users-repository';
 import { InternalServerError } from 'core/domain/errors';
+import { UserMap } from 'modules/users/mappers/user-map';
 
 export interface CreateUserRequest {
   firstName: string;
@@ -56,16 +57,9 @@ export class CreateUserUseCase
     }
 
     const user: User = userOrError.value;
+    const domainToPersistence = await UserMap.toPersistence(user);
 
-    await this.usersRepository.save({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email.value,
-      password: await user.password.getHashedValue(),
-      phone: user.phone.value,
-      emailIsVerified: user.emailIsVerified,
-    });
+    await this.usersRepository.save(domainToPersistence);
 
     return right(`Welcome ${user.firstName}! Please confirm your email`);
   }

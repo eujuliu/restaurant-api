@@ -3,8 +3,8 @@ import { UseCase } from 'core/domain/UseCase';
 import { Either, left, right } from 'core/logic/either';
 import { Email } from 'modules/users/domain/email';
 import { EmailInvalidError } from 'modules/users/domain/errors';
-import { Password } from 'modules/users/domain/password';
 import { generateJsonWebToken } from 'modules/users/infra/http/auth/generate-json-web-token';
+import { UserMap } from 'modules/users/mappers/user-map';
 import { IUsersRepository } from 'modules/users/repositories/users-repository';
 
 interface GetUserRequest {
@@ -33,10 +33,10 @@ export class GetUserUseCase
       return left(new ValidationError({}));
     }
 
-    const comparePasswords = await Password.comparePasswords(
-      password,
-      user.password
-    );
+    const persistenceUserToDomain = UserMap.toDomain(user);
+
+    const comparePasswords =
+      await persistenceUserToDomain.password.comparePassword(password);
 
     if (!comparePasswords) {
       return left(new ValidationError({}));

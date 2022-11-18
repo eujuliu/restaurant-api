@@ -1,16 +1,7 @@
-export interface UserProps {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  phone: string;
-  emailIsVerified: boolean;
-}
-
+import { PersistenceUser } from '../mappers/user-map';
 export interface IUsersRepository {
-  save(user: UserProps): Promise<void>;
+  save(user: PersistenceUser): Promise<void>;
   exists(email: string): Promise<boolean>;
-  findUserByEmail(email: string): Promise<UserProps | null>;
+  findUserByEmail(email: string): Promise<PersistenceUser | null>;
   updatePassword(email: string, newPassword: string): Promise<void>;
 }

@@ -6,6 +6,7 @@ import {
   PasswordsDoesNotMatchError,
 } from 'modules/users/domain/errors';
 import { Password } from 'modules/users/domain/password';
+import { PersistenceUser, UserMap } from 'modules/users/mappers/user-map';
 import { IUsersRepository } from 'modules/users/repositories/users-repository';
 
 interface ChangePasswordRequest {
@@ -31,10 +32,11 @@ export class ChangePasswordUseCase
     confirmNewPassword,
   }: ChangePasswordRequest): Promise<ChangePasswordResponse> {
     const user = await this.usersRepository.findUserByEmail(email);
+    const persistenceToDomain = UserMap.toDomain(user as PersistenceUser);
 
     if (
       !user ||
-      !(await Password.comparePasswords(oldPassword, user.password))
+      !(await persistenceToDomain.password.comparePassword(oldPassword))
     ) {
       return left(new ValidationError({}));
     }

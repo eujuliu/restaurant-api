@@ -27,16 +27,19 @@ export class User {
   phone: Phone;
   emailIsVerified: boolean;
 
-  constructor({
-    firstName,
-    lastName,
-    email,
-    password,
-    phone,
-    emailIsVerified,
-  }: Omit<User, 'id'>) {
+  constructor(
+    {
+      firstName,
+      lastName,
+      email,
+      password,
+      phone,
+      emailIsVerified,
+    }: Omit<User, 'id'>,
+    id?: string
+  ) {
     Object.assign(this, {
-      id: uuid(),
+      id: id || uuid(),
       firstName,
       lastName,
       email,
@@ -46,14 +49,17 @@ export class User {
     });
   }
 
-  static create({
-    firstName,
-    lastName,
-    email,
-    password,
-    phone,
-    emailIsVerified,
-  }: UserDataProps): Either<
+  static create(
+    {
+      firstName,
+      lastName,
+      email,
+      password,
+      phone,
+      emailIsVerified,
+    }: UserDataProps,
+    id?: string
+  ): Either<
     EmailInvalidError | InsecurePasswordError | PhoneInvalidError,
     User
   > {
@@ -75,14 +81,17 @@ export class User {
     }
 
     return right(
-      new User({
-        firstName,
-        lastName,
-        email: emailOrError.value,
-        password: passwordOrError.value,
-        phone: phoneOrError.value,
-        emailIsVerified,
-      })
+      new User(
+        {
+          firstName,
+          lastName,
+          email: emailOrError.value,
+          password: passwordOrError.value,
+          phone: phoneOrError.value,
+          emailIsVerified,
+        },
+        id
+      )
     );
   }
 }

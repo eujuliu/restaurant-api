@@ -1,6 +1,5 @@
 import { ValidationError } from 'core/domain/errors';
 import { PasswordsDoesNotMatchError } from 'modules/users/domain/errors';
-import { Password } from 'modules/users/domain/password';
 import { InMemoryUsersRepository } from 'modules/users/repositories/in-memory/in-memory-users-repository';
 import { IUsersRepository } from 'modules/users/repositories/users-repository';
 import {
@@ -8,6 +7,7 @@ import {
   CreateUserUseCase,
 } from '../create-user/create-user-use-case';
 import { ChangePasswordUseCase } from './change-password-use-case';
+import bcrypt from 'bcrypt';
 
 describe('Change password (use case)', () => {
   let usersRepository: IUsersRepository;
@@ -41,9 +41,9 @@ describe('Change password (use case)', () => {
 
     const user = await usersRepository.findUserByEmail(userData.email);
 
-    const bcryptResult = await Password.comparePasswords(
+    const bcryptResult = await bcrypt.compare(
       '@notheR123',
-      user?.password || ''
+      user?.password as string
     );
 
     expect(bcryptResult).toBe(true);

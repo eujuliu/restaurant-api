@@ -1,5 +1,6 @@
 import { prisma } from 'infra/prisma/client';
-import { IUsersRepository, UserProps } from '../users-repository';
+import { PersistenceUser } from 'modules/users/mappers/user-map';
+import { IUsersRepository } from '../users-repository';
 
 export class PrismaUsersRepository implements IUsersRepository {
   async save({
@@ -10,7 +11,7 @@ export class PrismaUsersRepository implements IUsersRepository {
     password,
     emailIsVerified,
     phone,
-  }: UserProps): Promise<void> {
+  }: PersistenceUser): Promise<void> {
     await prisma.user.create({
       data: {
         id,
@@ -34,7 +35,7 @@ export class PrismaUsersRepository implements IUsersRepository {
     return !!user;
   }
 
-  async findUserByEmail(email: string): Promise<UserProps | null> {
+  async findUserByEmail(email: string): Promise<PersistenceUser | null> {
     const user = await prisma.user.findUnique({
       where: {
         email,

@@ -1,8 +1,9 @@
-import { IUsersRepository, UserProps } from '../users-repository';
+import { PersistenceUser } from 'modules/users/mappers/user-map';
+import { IUsersRepository } from '../users-repository';
 
 export class InMemoryUsersRepository implements IUsersRepository {
-  private users: UserProps[] = [];
-  async save(user: UserProps): Promise<void> {
+  private users: PersistenceUser[] = [];
+  async save(user: PersistenceUser): Promise<void> {
     this.users.push(user);
   }
 
@@ -12,7 +13,7 @@ export class InMemoryUsersRepository implements IUsersRepository {
     return !!user;
   }
 
-  async findUserByEmail(email: string): Promise<UserProps | null> {
+  async findUserByEmail(email: string): Promise<PersistenceUser | null> {
     const user = this.users.filter((user) => user.email === email)[0];
 
     return user || null;

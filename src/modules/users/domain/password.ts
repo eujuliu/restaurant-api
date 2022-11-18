@@ -18,6 +18,10 @@ export class Password {
   }
 
   static create(props: PasswordProps): Either<InsecurePasswordError, Password> {
+    if (props.hashed) {
+      return right(new Password({ value: props.value, hashed: props.hashed }));
+    }
+
     if (
       !validator.isStrongPassword(props.value, {
         minLength: 8,
@@ -29,19 +33,26 @@ export class Password {
     ) {
       return left(new InsecurePasswordError({}));
     }
-    return right(
-      new Password({ value: props.value, hashed: !!props.hashed === true })
-    );
+
+    return right(new Password({ value: props.value, hashed: false }));
   }
 
-  static comparePasswords(password: string, encrypted: string) {
-    return new Promise((resolve, reject) => {
-      bcrypt.compare(password, encrypted, (err, result) => {
-        if (err) {
-          return reject(err);
-        }
+  async comparePassword(plainTextPassword: string): Promise<boolean> {
+    let hashed: string;
 
-        resolve(result);
+    if (this.isAlreadyHashed()) {
+      hashed = this.props.value;
+      return this.bcryptCompare(plainTextPassword, hashed);
+    } else {
+      return this.props.value === plainTextPassword;
+    }
+  }
+
+  private bcryptCompare(plainText: string, hashed: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      bcrypt.compare(plainText, hashed, (err, compareResult) => {
+        if (err) return resolve(false);
+        return resolve(compareResult);
       });
     });
   }
@@ -58,11 +69,11 @@ export class Password {
     });
   }
 
-  public isAlreadyHashed(): boolean {
-    return this.props.hashed || false;
+  isAlreadyHashed(): boolean {
+    return this.props.hashed as boolean;
   }
 
-  public getHashedValue(): Promise<string> {
+  getHashedValue(): Promise<string> {
     return new Promise((resolve) => {
       if (this.isAlreadyHashed()) {
         return resolve(this.props.value);
