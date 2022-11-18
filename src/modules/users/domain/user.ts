@@ -49,17 +49,14 @@ export class User {
     });
   }
 
-  static create(
-    {
-      firstName,
-      lastName,
-      email,
-      password,
-      phone,
-      emailIsVerified,
-    }: UserDataProps,
-    id?: string
-  ): Either<
+  static create({
+    firstName,
+    lastName,
+    email,
+    password,
+    phone,
+    emailIsVerified,
+  }: UserDataProps): Either<
     EmailInvalidError | InsecurePasswordError | PhoneInvalidError,
     User
   > {
@@ -81,17 +78,14 @@ export class User {
     }
 
     return right(
-      new User(
-        {
-          firstName,
-          lastName,
-          email: emailOrError.value,
-          password: passwordOrError.value,
-          phone: phoneOrError.value,
-          emailIsVerified,
-        },
-        id
-      )
+      new User({
+        firstName,
+        lastName,
+        email: emailOrError.value,
+        password: passwordOrError.value,
+        phone: phoneOrError.value,
+        emailIsVerified,
+      })
     );
   }
 }

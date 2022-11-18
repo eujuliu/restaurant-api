@@ -34,14 +34,17 @@ export class UserMap {
     });
     const phoneOrError = Phone.create(persistenceUser.phone);
 
-    const domainUser = new User({
-      firstName: persistenceUser.firstName,
-      lastName: persistenceUser.lastName,
-      email: emailOrError.value as Email,
-      password: passwordOrError.value as Password,
-      phone: phoneOrError.value as Phone,
-      emailIsVerified: persistenceUser.emailIsVerified,
-    });
+    const domainUser = new User(
+      {
+        firstName: persistenceUser.firstName,
+        lastName: persistenceUser.lastName,
+        email: emailOrError.value as Email,
+        password: passwordOrError.value as Password,
+        phone: phoneOrError.value as Phone,
+        emailIsVerified: persistenceUser.emailIsVerified,
+      },
+      persistenceUser.id
+    );
 
     return domainUser;
   }
