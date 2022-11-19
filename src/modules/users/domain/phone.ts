@@ -14,11 +14,11 @@ export class Phone {
   }
 
   static create(phone: string): Either<PhoneInvalidError, Phone> {
-    const normalizedPhone = normalizePhone(55, phone);
-
-    if (!validator.isMobilePhone(normalizedPhone, 'pt-BR')) {
+    if (!validator.isMobilePhone(phone, 'pt-BR')) {
       return left(new PhoneInvalidError({}));
     }
+
+    const normalizedPhone = normalizePhone(55, phone);
 
     return right(new Phone(normalizedPhone));
   }
