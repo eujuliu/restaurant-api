@@ -1,7 +1,6 @@
 import { Either, left, right } from 'core/logic/either';
 import { PostalCodeInvalidError } from './errors';
 import validator from 'validator';
-import { normalizePostalCode } from './utils/normalize-postal-code';
 
 export class PostalCode {
   constructor(private readonly postalCode: string) {
@@ -19,8 +18,6 @@ export class PostalCode {
       return left(new PostalCodeInvalidError({}));
     }
 
-    const normalizedPostalCode = normalizePostalCode(postalCode) as string;
-
-    return right(new PostalCode(normalizedPostalCode));
+    return right(new PostalCode(postalCode));
   }
 }

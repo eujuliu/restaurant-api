@@ -47,7 +47,7 @@ describe('Create a new user (entity)', () => {
     expect(userOrError.value).toStrictEqual(new InsecurePasswordError({}));
   });
 
-  it('Should be not able to create a user with invalid phone', () => {
+  it('Should be not able to create a user with an invalid phone', () => {
     const userOrError = User.create({
       firstName: 'Alex',
       lastName: 'Doe',

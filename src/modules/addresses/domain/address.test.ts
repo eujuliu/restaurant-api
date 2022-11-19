@@ -1,14 +1,28 @@
 import { Address } from './address';
+import { PostalCodeInvalidError } from './errors';
 
-test('Should be able to create a instance of Address', () => {
-  const address = new Address({
-    address: 'Av. Gen. San Martin, 856',
-    city: 'Rio de Janeiro',
-    country: 'Brasil',
-    district: 'Leblon',
-    postalCode: '22441014',
+describe('Create a new address (entity)', () => {
+  it('Should be able to create an instance of Address', () => {
+    const address = Address.create({
+      address: 'Av. Atlântica, 2266',
+      city: 'Rio de Janeiro',
+      country: 'Brasil',
+      district: 'Copacabana',
+      postalCode: '22041-001',
+    });
+
+    expect(address.value).toHaveProperty('id');
   });
 
-  expect(address).toHaveProperty('id');
-  expect(address.address).toBe('Av. Gen. San Martin, 856');
+  it('Should be not able to create an instance of address with an invalid postal code', () => {
+    const address = Address.create({
+      address: 'Av. Atlântica, 2266',
+      city: 'Rio de Janeiro',
+      country: 'Brasil',
+      district: 'Copacabana',
+      postalCode: '11203',
+    });
+
+    expect(address.value).toStrictEqual(new PostalCodeInvalidError({}));
+  });
 });
