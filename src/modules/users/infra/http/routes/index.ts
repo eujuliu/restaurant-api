@@ -5,11 +5,11 @@ import { getUserFactory } from 'modules/users/factories/get-user-factory';
 
 const userRouter = Router();
 
-userRouter.post('/register', (request, response) => {
+userRouter.post('/users', (request, response) => {
   return createUserFactory().handle(request, response);
 });
 
-userRouter.get('/login', (request, response) => {
+userRouter.get('/user', (request, response) => {
   return getUserFactory().handle(request, response);
 });
 
