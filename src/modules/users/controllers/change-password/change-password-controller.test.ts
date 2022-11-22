@@ -4,7 +4,7 @@ import request from 'supertest';
 import { CreateUserBodyProps } from '../create-user/create-user-controller';
 import { v4 as uuid } from 'uuid';
 
-describe('POST /user/security (controller)', () => {
+describe('PUT /v1/user/security (controller)', () => {
   let userData: CreateUserBodyProps;
 
   beforeAll(() => {
@@ -20,10 +20,10 @@ describe('POST /user/security (controller)', () => {
   it('Should change the user password', async () => {
     const token = generateJsonWebToken(uuid(), userData.email);
 
-    await request(app).post('/register').send(userData);
+    await request(app).post('/v1/users').send(userData);
 
     const response = await request(app)
-      .put('/user/security')
+      .put('/v1/user/security')
       .send({
         oldPassword: userData.password,
         newPassword: '@Other321',
@@ -37,10 +37,10 @@ describe('POST /user/security (controller)', () => {
   it('Should be not able to change the password if old password is wrong', async () => {
     const token = generateJsonWebToken(uuid(), userData.email);
 
-    await request(app).post('/register').send(userData);
+    await request(app).post('/v1/users').send(userData);
 
     const response = await request(app)
-      .put('/user/security')
+      .put('/v1/user/security')
       .send({
         oldPassword: '@Password123',
         newPassword: '@Other321',
