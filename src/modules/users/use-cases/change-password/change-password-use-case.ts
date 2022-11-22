@@ -18,7 +18,7 @@ interface ChangePasswordRequest {
 
 type ChangePasswordResponse = Either<
   ValidationError | InsecurePasswordError | PasswordsDoesNotMatchError,
-  string
+  null | void
 >;
 
 export class ChangePasswordUseCase
@@ -55,6 +55,6 @@ export class ChangePasswordUseCase
 
     await this.usersRepository.updatePassword(email, hashedNewPassword);
 
-    return right('Password updated successfully');
+    return right(null);
   }
 }

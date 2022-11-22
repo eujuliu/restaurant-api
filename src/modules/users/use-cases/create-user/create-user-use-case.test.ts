@@ -21,13 +21,10 @@ describe('Create a new user (use case)', () => {
   });
 
   it('Should be able to create a new user', async () => {
-    const response = await createUserUseCase.execute(userData);
+    await createUserUseCase.execute(userData);
 
     const userFound = await usersRepository.findUserByEmail(userData.email);
 
-    expect(response.value).toBe(
-      `Welcome ${userData.firstName}! Please confirm your email`
-    );
     expect(userFound?.email).toBe(userData.email);
   });
 

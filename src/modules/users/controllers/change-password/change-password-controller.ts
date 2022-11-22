@@ -47,9 +47,7 @@ export class ChangePasswordController {
           .json(responseOrError.value);
       }
 
-      return response.status(200).json({
-        message: responseOrError.value,
-      });
+      return response.status(200).send();
     } catch (err) {
       return response
         .status(500)

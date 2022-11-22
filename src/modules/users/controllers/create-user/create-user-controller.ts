@@ -41,9 +41,7 @@ export class CreateUserController {
           .json(responseOrError.value);
       }
 
-      return response.status(201).json({
-        message: responseOrError.value,
-      });
+      return response.status(201).send();
     } catch (err) {
       return response
         .status(500)

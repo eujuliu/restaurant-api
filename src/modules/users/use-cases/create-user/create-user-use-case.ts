@@ -23,7 +23,7 @@ type CreateUserResponse = Either<
   | InsecurePasswordError
   | AccountAlreadyExistsError
   | InternalServerError,
-  string
+  null | void
 >;
 
 export class CreateUserUseCase
@@ -61,6 +61,6 @@ export class CreateUserUseCase
 
     await this.usersRepository.save(domainToPersistence);
 
-    return right(`Welcome ${user.firstName}! Please confirm your email`);
+    return right(null);
   }
 }

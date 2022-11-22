@@ -19,9 +19,6 @@ describe('POST /v1/users (controller)', () => {
     const response = await request(app).post('/v1/users').send(userData);
 
     expect(response.status).toBe(201);
-    expect(response.body).toStrictEqual({
-      message: `Welcome ${userData.firstName}! Please confirm your email`,
-    });
   });
 
   it('Should be not able to create a existing user', async () => {
