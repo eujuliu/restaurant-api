@@ -18,3 +18,14 @@ export class PostalCodeInvalidError extends BaseError {
     });
   }
 }
+
+export class AddressAlreadyRegisteredError extends BaseError {
+  constructor({ message, action, errorId, statusCode }: ErrorProps) {
+    super({
+      message: message || `This address is already registered`,
+      action: action || 'Try another address',
+      errorId: errorId || uuid(),
+      statusCode: statusCode || 400,
+    });
+  }
+}

@@ -1,11 +1,12 @@
 -- CreateTable
 CREATE TABLE "Address" (
     "id" TEXT NOT NULL,
+    "name" VARCHAR(15) NOT NULL,
     "address" VARCHAR(50) NOT NULL,
-    "address2" VARCHAR(40) NOT NULL,
+    "address2" VARCHAR(45) NOT NULL,
+    "district" VARCHAR(50) NOT NULL,
     "city" VARCHAR(35) NOT NULL,
-    "country" VARCHAR(50) NOT NULL,
-    "postalCode" VARCHAR(10) NOT NULL,
+    "postalCode" VARCHAR(15) NOT NULL,
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "Address_pkey" PRIMARY KEY ("id")

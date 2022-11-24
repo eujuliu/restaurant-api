@@ -4,51 +4,56 @@ import { PostalCodeInvalidError } from './errors';
 import { PostalCode } from './postal-code';
 
 export interface AddressProps {
+  name: string;
   address: string;
-  address2?: string;
+  address2: string;
+  district: string;
   city: string;
-  country: string;
-  district?: string;
   postalCode: string;
+  userId: string;
 }
 
 export class Address {
   readonly id: string;
-  address: string;
-  address2?: string;
-  city: string;
-  country: string;
-  district?: string;
-  postalCode: PostalCode;
+  readonly name: string;
+  readonly address: string;
+  readonly address2: string;
+  readonly district: string;
+  readonly city: string;
+  readonly postalCode: PostalCode;
+  readonly userId: string;
   constructor(
     {
+      name,
       address,
       address2,
-      city,
       district,
+      city,
       postalCode,
-      country,
+      userId,
     }: Omit<Address, 'id'>,
     id?: string
   ) {
     Object.assign(this, {
       id: id || uuid(),
+      name,
       address,
-      address2: address2 || '',
+      address2,
+      district,
       city,
       postalCode,
-      district,
-      country,
+      userId,
     });
   }
 
   static create({
+    name,
     address,
     address2,
     district,
     city,
-    country,
     postalCode,
+    userId,
   }: AddressProps): Either<PostalCodeInvalidError, Address> {
     const postalCodeOrError = PostalCode.create(postalCode);
 
@@ -58,11 +63,12 @@ export class Address {
 
     return right(
       new Address({
+        name,
         address,
         address2,
         district,
         city,
-        country,
+        userId,
         postalCode: postalCodeOrError.value,
       })
     );

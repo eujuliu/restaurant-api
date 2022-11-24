@@ -9,7 +9,7 @@ interface PasswordProps {
 }
 
 export class Password {
-  constructor(private props: PasswordProps) {
+  constructor(private readonly props: PasswordProps) {
     this.props = props;
   }
 

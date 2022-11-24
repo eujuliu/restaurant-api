@@ -14,7 +14,9 @@
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "lint": "prettier --check src/**",
-    "lint:fix": "eslint src/** --fix && prettier --write src/**"
+    "lint:fix": "eslint src/** --fix && prettier --write src/**",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy"
   },
   "keywords": [],
   "author": "",

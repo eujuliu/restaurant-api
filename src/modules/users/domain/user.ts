@@ -20,12 +20,12 @@ interface UserDataProps {
 
 export class User {
   readonly id: string;
-  firstName: string;
-  lastName: string;
-  email: Email;
-  password: Password;
-  phone: Phone;
-  emailIsVerified: boolean;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly email: Email;
+  readonly password: Password;
+  readonly phone: Phone;
+  readonly emailIsVerified: boolean;
 
   constructor(
     {
