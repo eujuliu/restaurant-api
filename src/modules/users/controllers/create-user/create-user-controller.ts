@@ -1,7 +1,7 @@
 import { InternalServerError, ValidationError } from 'core/domain/errors';
+import { bodyPropsIsEmpty } from 'core/domain/utils/body-props-is-empty';
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from 'modules/users/use-cases/create-user/create-user-use-case';
-import { bodyPropsIsEmpty } from '../utils/body-props-is-empty';
 
 export interface CreateUserBodyProps {
   firstName: string;

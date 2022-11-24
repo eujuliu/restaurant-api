@@ -1,27 +1,36 @@
 import { Request, Response } from 'express';
-import { ChangePasswordUseCase } from 'modules/users/use-cases/change-password/change-password-use-case';
 import { InternalServerError, ValidationError } from 'core/domain/errors';
-import { SECRET } from 'config';
-import jwt from 'jsonwebtoken';
-import 'dotenv/config';
 import { bodyPropsIsEmpty } from 'core/domain/utils/body-props-is-empty';
+import { CreateAddressUseCase } from 'modules/addresses/use-cases/create-address/create-address-use-case';
+import jwt from 'jsonwebtoken';
+import { SECRET } from 'config';
 
-export interface ChangePasswordBodyProps {
-  oldPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
+export interface CreateAddressBodyProps {
+  name: string;
+  address: string;
+  address2: string;
+  district: string;
+  city: string;
+  postalCode: string;
 }
 
-export class ChangePasswordController {
-  constructor(private changePasswordUseCase: ChangePasswordUseCase) {}
+export class CreateAddressController {
+  constructor(private createAddressUseCase: CreateAddressUseCase) {}
   async handle(request: Request, response: Response) {
     if (!request.cookies.session_id) {
       return response.status(401).json(new ValidationError({}));
     }
 
-    const body: ChangePasswordBodyProps = request.body;
+    const {
+      name,
+      address,
+      address2,
+      district,
+      city,
+      postalCode,
+    }: CreateAddressBodyProps = await request.body;
 
-    if (bodyPropsIsEmpty(body)) {
+    if (bodyPropsIsEmpty({ name, address, city, postalCode })) {
       return response.status(400).json(
         new ValidationError({
           message: 'Some field is empty',
@@ -31,14 +40,15 @@ export class ChangePasswordController {
     }
 
     try {
-      const { oldPassword, newPassword, confirmNewPassword } = body;
       const decoded = jwt.verify(await request.cookies.session_id, SECRET);
-
-      const responseOrError = await this.changePasswordUseCase.execute({
-        email: (<{ email: string }>decoded).email,
-        oldPassword,
-        newPassword,
-        confirmNewPassword,
+      const responseOrError = await this.createAddressUseCase.execute({
+        name,
+        address,
+        address2,
+        district,
+        city,
+        postalCode,
+        userId: (<{ id: string }>decoded).id,
       });
 
       if (responseOrError.isLeft()) {
@@ -47,7 +57,7 @@ export class ChangePasswordController {
           .json(responseOrError.value);
       }
 
-      return response.status(200).send();
+      return response.status(201).send();
     } catch (err) {
       return response
         .status(500)

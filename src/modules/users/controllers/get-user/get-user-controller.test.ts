@@ -16,7 +16,10 @@ describe('GET /v1/user (controller)', () => {
       password: '@Test123',
     });
 
+    const cookie = response.get('Set-Cookie') as string[];
+
     expect(response.status).toBe(200);
+    expect(cookie[0].slice(0, 10)).toBe('session_id');
   });
 
   it('Should not return a non existing user', async () => {
