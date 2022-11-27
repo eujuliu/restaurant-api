@@ -25,8 +25,9 @@ describe('POST /v1/addresses (controller)', () => {
       .send({
         name: 'Home',
         address: 'Av. Delfim Moreira, 280',
-        address2: '',
+        address2: null,
         district: 'Leblon',
+        state: 'RJ',
         city: 'Rio de Janeiro',
         postalCode: '22441-000',
       })
@@ -39,8 +40,9 @@ describe('POST /v1/addresses (controller)', () => {
     const response = await request(app).post('/v1/addresses').send({
       name: 'Home',
       address: 'Av. Delfim Moreira, 280',
-      address2: '',
+      address2: null,
       district: 'Leblon',
+      state: 'RJ',
       city: 'Rio de Janeiro',
       postalCode: '22441-000',
     });

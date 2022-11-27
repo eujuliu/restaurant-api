@@ -8,9 +8,10 @@ import { SECRET } from 'config';
 export interface CreateAddressBodyProps {
   name: string;
   address: string;
-  address2: string;
-  district: string;
+  address2: string | null;
+  district: string | null;
   city: string;
+  state: string | null;
   postalCode: string;
 }
 
@@ -27,6 +28,7 @@ export class CreateAddressController {
       address2,
       district,
       city,
+      state,
       postalCode,
     }: CreateAddressBodyProps = await request.body;
 
@@ -47,6 +49,7 @@ export class CreateAddressController {
         address2,
         district,
         city,
+        state,
         postalCode,
         userId: (<{ id: string }>decoded).id,
       });

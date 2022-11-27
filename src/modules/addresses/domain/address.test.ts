@@ -7,9 +7,10 @@ describe('Create a new address (entity)', () => {
     const address = Address.create({
       name: 'Home',
       address: 'Av. Atlântica, 2266',
-      address2: '',
+      address2: null,
       city: 'Rio de Janeiro',
       district: 'Copacabana',
+      state: 'RJ',
       postalCode: '22041-001',
       userId: uuid(),
     });
@@ -21,9 +22,10 @@ describe('Create a new address (entity)', () => {
     const address = Address.create({
       name: 'Home',
       address: 'Av. Atlântica, 2266',
-      address2: '',
+      address2: null,
       city: 'Rio de Janeiro',
       district: 'Copacabana',
+      state: 'RJ',
       postalCode: '11203',
       userId: uuid(),
     });

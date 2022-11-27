@@ -4,7 +4,7 @@ interface BaseErrorProps {
   message: string;
   action: string;
   statusCode: number;
-  errorId: string;
+  errorId?: string;
 }
 
 interface ErrorProps {
@@ -15,10 +15,10 @@ interface ErrorProps {
 }
 
 export class BaseError extends Error {
-  name: string;
-  action: string;
-  statusCode: number;
-  errorId: string;
+  readonly name: string;
+  readonly action: string;
+  readonly statusCode: number;
+  readonly errorId: string;
   constructor({ action, errorId, message, statusCode }: BaseErrorProps) {
     super();
     this.name = this.constructor.name;
@@ -34,7 +34,7 @@ export class InternalServerError extends BaseError {
     super({
       message: message || 'An Internal Server Error occurred',
       action: action || 'Please contact the support',
-      errorId: errorId || uuid(),
+      errorId: errorId,
       statusCode: statusCode || 500,
     });
   }
@@ -45,8 +45,19 @@ export class ValidationError extends BaseError {
     super({
       message: message || 'A validation error occurred',
       action: action || 'Change the data and try again',
-      errorId: errorId || uuid(),
+      errorId: errorId,
       statusCode: statusCode || 400,
+    });
+  }
+}
+
+export class ResourceNotFoundError extends BaseError {
+  constructor({ message, action, errorId, statusCode }: ErrorProps) {
+    super({
+      message: message || 'Non resource found in the database',
+      action: action || 'Try again with another data',
+      errorId: errorId,
+      statusCode: statusCode || 404,
     });
   }
 }

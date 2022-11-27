@@ -5,9 +5,10 @@ export interface PersistenceAddress {
   id: string;
   name: string;
   address: string;
-  address2: string;
-  district: string;
+  address2: string | null;
+  district: string | null;
   city: string;
+  state: string | null;
   postalCode: string;
   userId: string;
 }
@@ -20,6 +21,7 @@ export class AddressMap {
     address2,
     district,
     city,
+    state,
     postalCode,
     userId,
   }: Address): PersistenceAddress {
@@ -30,6 +32,7 @@ export class AddressMap {
       address2,
       district,
       city,
+      state,
       postalCode: postalCode.value,
       userId,
     };
@@ -42,6 +45,7 @@ export class AddressMap {
     address2,
     district,
     city,
+    state,
     postalCode,
     userId,
   }: PersistenceAddress): Address {
@@ -54,6 +58,7 @@ export class AddressMap {
         address2,
         district,
         city,
+        state,
         postalCode: postalCodeOrError.value as PostalCode,
         userId,
       },

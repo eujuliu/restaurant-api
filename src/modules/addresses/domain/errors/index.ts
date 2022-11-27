@@ -1,5 +1,4 @@
 import { BaseError } from 'core/domain/errors';
-import { v4 as uuid } from 'uuid';
 
 interface ErrorProps {
   message?: string;
@@ -13,7 +12,7 @@ export class PostalCodeInvalidError extends BaseError {
     super({
       message: message || `This postal code is not valid.`,
       action: action || 'Verify the data and try again',
-      errorId: errorId || uuid(),
+      errorId: errorId,
       statusCode: statusCode || 400,
     });
   }
@@ -24,7 +23,7 @@ export class AddressAlreadyRegisteredError extends BaseError {
     super({
       message: message || `This address is already registered`,
       action: action || 'Try another address',
-      errorId: errorId || uuid(),
+      errorId: errorId,
       statusCode: statusCode || 400,
     });
   }

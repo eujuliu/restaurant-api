@@ -1,6 +1,6 @@
 import { prisma } from 'infra/prisma/client';
 import { PersistenceAddress } from 'modules/addresses/mappers/address-map';
-import { IAddressesRepository } from '../addresses-repository';
+import { IAddressesRepository, updateData } from '../addresses-repository';
 
 export class PrismaAddressRepository implements IAddressesRepository {
   async save({
@@ -10,6 +10,7 @@ export class PrismaAddressRepository implements IAddressesRepository {
     address2,
     district,
     city,
+    state,
     postalCode,
     userId,
   }: PersistenceAddress): Promise<void> {
@@ -21,15 +22,14 @@ export class PrismaAddressRepository implements IAddressesRepository {
         address2,
         district,
         city,
+        state,
         postalCode,
         userId,
       },
     });
   }
 
-  async findAddressesByUserId(
-    userId: string
-  ): Promise<PersistenceAddress[] | null> {
+  async findAddressesByUserId(userId: string): Promise<PersistenceAddress[]> {
     const addresses = await prisma.address.findMany({
       where: {
         userId,
@@ -37,5 +37,35 @@ export class PrismaAddressRepository implements IAddressesRepository {
     });
 
     return addresses;
+  }
+
+  async findAddressById(id: string): Promise<PersistenceAddress | null> {
+    const address = await prisma.address.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return address;
+  }
+
+  async update(
+    id: string,
+    { name, address, address2, city, district, state, postalCode }: updateData
+  ): Promise<void> {
+    await prisma.address.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+        address,
+        address2,
+        city,
+        district,
+        state,
+        postalCode,
+      },
+    });
   }
 }

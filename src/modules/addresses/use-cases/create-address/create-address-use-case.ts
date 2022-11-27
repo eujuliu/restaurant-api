@@ -11,9 +11,10 @@ import { IAddressesRepository } from 'modules/addresses/repositories/addresses-r
 export interface CreateAddressRequest {
   name: string;
   address: string;
-  address2: string;
-  district: string;
+  address2: string | null;
+  district: string | null;
   city: string;
+  state: string | null;
   postalCode: string;
   userId: string;
 }
@@ -34,6 +35,7 @@ export class CreateAddressUseCase
     address2,
     district,
     city,
+    state,
     postalCode,
     userId,
   }: CreateAddressRequest): Promise<CreateAddressResponse> {
@@ -54,6 +56,7 @@ export class CreateAddressUseCase
       address2,
       district,
       city,
+      state,
       postalCode,
       userId,
     });
@@ -62,9 +65,9 @@ export class CreateAddressUseCase
       return left(addressOrError.value);
     }
 
-    const persistenceAddress = AddressMap.toPersistence(addressOrError.value);
+    const toPersistenceAddress = AddressMap.toPersistence(addressOrError.value);
 
-    this.addressRepository.save(persistenceAddress);
+    this.addressRepository.save(toPersistenceAddress);
 
     return right(null);
   }

@@ -18,9 +18,10 @@ describe('Create a new address (use-case)', () => {
     addressData = {
       name: 'Home',
       address: 'R. Farme de Amoedo, 16',
-      address2: '',
+      address2: null,
       district: 'Ipanema',
       city: 'Rio de Janeiro',
+      state: 'RJ',
       postalCode: '22420-020',
       userId: '801482a1-6d71-4408-a91a-6829c62c6efd',
     };

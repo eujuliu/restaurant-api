@@ -22,13 +22,14 @@ model User {
 }
 
 model Address {
-  id         String @id
-  name       String @db.VarChar(15)
-  address    String @db.VarChar(50)
-  address2   String @db.VarChar(45)
-  district   String @db.VarChar(50)
-  city       String @db.VarChar(35)
-  postalCode String @db.VarChar(15)
+  id         String  @id
+  name       String  @db.VarChar(15)
+  address    String  @db.VarChar(50)
+  address2   String? @db.VarChar(45)
+  district   String? @db.VarChar(50)
+  state      String? @db.VarChar(2)
+  city       String  @db.VarChar(35)
+  postalCode String  @db.VarChar(15)
   userId     String
 
   User User @relation(fields: [userId], references: [id])
