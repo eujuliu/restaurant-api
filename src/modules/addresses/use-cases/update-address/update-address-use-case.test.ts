@@ -1,3 +1,4 @@
+import { ResourceNotFoundError } from 'core/domain/errors';
 import { IAddressesRepository } from 'modules/addresses/repositories/addresses-repository';
 import { InMemoryAddressRepository } from 'modules/addresses/repositories/in-memory/in-memory-address-repository';
 import {
@@ -45,5 +46,14 @@ describe('Update address (use-case)', () => {
     );
 
     expect(addressesUpdated[0].address).toBe('Rua Ana Virtebo de Souza, 305');
+  });
+
+  it('Should be not able to update a non existing address', async () => {
+    const response = await updateAddressUseCase.execute({
+      id: '208682a1-6d39-4408-a91a-6859c62c6fed',
+      address: 'Rua Ana Virtebo de Souza, 305',
+    });
+
+    expect(response.value).toStrictEqual(new ResourceNotFoundError({}));
   });
 });
