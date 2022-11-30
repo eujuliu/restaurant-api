@@ -29,10 +29,22 @@ export class PrismaAddressRepository implements IAddressesRepository {
     });
   }
 
-  async findAddressesByUserId(userId: string): Promise<PersistenceAddress[]> {
+  async findAddressesByUserId(
+    userId: string
+  ): Promise<Omit<PersistenceAddress, 'userId'>[]> {
     const addresses = await prisma.address.findMany({
       where: {
         userId,
+      },
+      select: {
+        id: true,
+        name: true,
+        address: true,
+        address2: true,
+        district: true,
+        city: true,
+        state: true,
+        postalCode: true,
       },
     });
 

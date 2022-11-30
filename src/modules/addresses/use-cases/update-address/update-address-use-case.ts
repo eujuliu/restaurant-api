@@ -12,6 +12,7 @@ export interface UpdateAddressRequest {
   address2?: string;
   district?: string;
   city?: string;
+  state?: string;
   postalCode?: string;
 }
 
@@ -31,6 +32,7 @@ export class UpdateAddressUseCase
     address2,
     district,
     city,
+    state,
     postalCode,
   }: UpdateAddressRequest): Promise<UpdateAddressResponse> {
     const addressExists = await this.addressRepository.findAddressById(id);
@@ -47,6 +49,12 @@ export class UpdateAddressUseCase
       }
 
       await this.addressRepository.update(id, {
+        name,
+        address,
+        address2,
+        district,
+        city,
+        state,
         postalCode: postalCodeOrError.value.value,
       });
 
@@ -59,6 +67,7 @@ export class UpdateAddressUseCase
       address2,
       district,
       city,
+      state,
     });
 
     return right(null);

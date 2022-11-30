@@ -67,7 +67,7 @@ export class CreateAddressUseCase
 
     const toPersistenceAddress = AddressMap.toPersistence(addressOrError.value);
 
-    this.addressRepository.save(toPersistenceAddress);
+    await this.addressRepository.save(toPersistenceAddress);
 
     return right(null);
   }

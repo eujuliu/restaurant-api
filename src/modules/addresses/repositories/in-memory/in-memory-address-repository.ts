@@ -7,10 +7,13 @@ export class InMemoryAddressRepository implements IAddressesRepository {
     this.addresses.push(address);
   }
 
-  async findAddressesByUserId(userId: string): Promise<PersistenceAddress[]> {
-    const addresses = this.addresses.filter(
-      (address) => address.userId === userId
-    );
+  async findAddressesByUserId(
+    userId: string
+  ): Promise<Omit<PersistenceAddress, 'userId'>[]> {
+    const addresses = this.addresses
+      .filter((address) => address.userId === userId)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .map(({ userId, ...rest }) => rest);
 
     return addresses;
   }
