@@ -25,12 +25,12 @@ describe('PUT /v1/address (controller)', () => {
       .post('/v1/addresses')
       .send({
         name: 'Home',
-        address: 'R. Caranguejo, 113',
+        address: '222, Twenty-second Street',
         address2: null,
-        district: 'Perequê',
-        city: 'Ilhabela',
+        district: 'Twenty-second',
+        city: 'São Paulo',
         state: 'SP',
-        postalCode: '11630-000',
+        postalCode: '10000-000',
       })
       .set('Cookie', cookie);
   });
@@ -44,7 +44,7 @@ describe('PUT /v1/address (controller)', () => {
       .send({
         id: addresses.body[0].id as string,
         name: 'Work',
-        address: 'Rua Ana Virtebo de Souza, 311',
+        address: '22, Twenty-second Street',
       })
       .set('Cookie', cookie);
 
@@ -57,7 +57,7 @@ describe('PUT /v1/address (controller)', () => {
       .send({
         id: uuid(),
         name: 'Work',
-        address: 'Rua Ana Virtebo de Souza, 311',
+        address: '22, Twenty-second Street',
       })
       .set('Cookie', cookie);
 

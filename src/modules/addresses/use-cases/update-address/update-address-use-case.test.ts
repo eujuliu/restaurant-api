@@ -20,12 +20,12 @@ describe('Update address (use-case)', () => {
 
     addressData = {
       name: 'Home',
-      address: 'R. Caranguejo, 113',
+      address: '222, Twenty-second Street',
       address2: null,
-      district: 'Perequê',
-      city: 'Ilhabela',
+      district: 'Twenty-second',
+      city: 'São Paulo',
       state: 'SP',
-      postalCode: '11630-000',
+      postalCode: '10000-000',
       userId: '801482a1-6d71-4408-a91a-6829c62c6efd',
     };
   });
@@ -38,20 +38,20 @@ describe('Update address (use-case)', () => {
 
     await updateAddressUseCase.execute({
       id: addressesNotUpdated[0].id,
-      address: 'Rua Ana Virtebo de Souza, 305',
+      address: '22, Twenty-second Street',
     });
 
     const addressesUpdated = await addressRepository.findAddressesByUserId(
       addressData.userId
     );
 
-    expect(addressesUpdated[0].address).toBe('Rua Ana Virtebo de Souza, 305');
+    expect(addressesUpdated[0].address).toBe('22, Twenty-second Street');
   });
 
   it('Should be not able to update a non existing address', async () => {
     const response = await updateAddressUseCase.execute({
       id: '208682a1-6d39-4408-a91a-6859c62c6fed',
-      address: 'Rua Ana Virtebo de Souza, 305',
+      address: '22, Twenty-second Street',
     });
 
     expect(response.value).toStrictEqual(new ResourceNotFoundError({}));

@@ -24,9 +24,9 @@ describe('GET /v1/addresses', () => {
       .post('/v1/addresses')
       .send({
         name: 'Home',
-        address: '20 Twentieth Street',
+        address: '21 Twenty-first Street',
         address2: null,
-        district: 'Twentieth',
+        district: 'Twenty-first',
         city: 'São Paulo',
         state: 'SP',
         postalCode: '10000-000',
@@ -38,6 +38,6 @@ describe('GET /v1/addresses', () => {
       .get('/v1/addresses')
       .set('Cookie', cookie);
 
-    expect(addresses.body[0].address).toBe('20 Twentieth Street');
+    expect(addresses.body[0].address).toBe('21 Twenty-first Street');
   });
 });

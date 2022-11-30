@@ -17,12 +17,12 @@ describe('Create a new address (use-case)', () => {
     createAddressUseCase = new CreateAddressUseCase(addressRepository);
     addressData = {
       name: 'Home',
-      address: 'R. Farme de Amoedo, 16',
+      address: '20, Twentieth Street',
       address2: null,
-      district: 'Ipanema',
-      city: 'Rio de Janeiro',
-      state: 'RJ',
-      postalCode: '22420-020',
+      district: 'Twentieth',
+      city: 'São Paulo',
+      state: 'SP',
+      postalCode: '10000-000',
       userId: '801482a1-6d71-4408-a91a-6829c62c6efd',
     };
   });

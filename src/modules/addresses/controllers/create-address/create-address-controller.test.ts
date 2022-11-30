@@ -24,12 +24,12 @@ describe('POST /v1/addresses (controller)', () => {
       .post('/v1/addresses')
       .send({
         name: 'Home',
-        address: 'Av. Delfim Moreira, 280',
+        address: '20, Twentieth Street',
         address2: null,
-        district: 'Leblon',
-        state: 'RJ',
-        city: 'Rio de Janeiro',
-        postalCode: '22441-000',
+        district: 'Twentieth',
+        city: 'São Paulo',
+        state: 'SP',
+        postalCode: '10000-000',
       })
       .set('Cookie', cookie);
 
@@ -39,12 +39,12 @@ describe('POST /v1/addresses (controller)', () => {
   it('Should be not able to add an address if the cookie does not exist', async () => {
     const response = await request(app).post('/v1/addresses').send({
       name: 'Home',
-      address: 'Av. Delfim Moreira, 280',
+      address: '20, Twentieth Street',
       address2: null,
-      district: 'Leblon',
-      state: 'RJ',
-      city: 'Rio de Janeiro',
-      postalCode: '22441-000',
+      district: 'Twentieth',
+      city: 'São Paulo',
+      state: 'SP',
+      postalCode: '10000-000',
     });
 
     expect(response.status).toBe(401);

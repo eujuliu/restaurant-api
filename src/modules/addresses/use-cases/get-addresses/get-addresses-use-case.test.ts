@@ -19,13 +19,13 @@ describe('Get addresses (use-case)', () => {
     getAddressesUseCase = new GetAddressesUseCase(addressRepository);
 
     addressData = {
-      name: 'Work',
-      address: 'R. Conde São João Duas Barra, 847',
+      name: 'Home',
+      address: '21 Twenty-first Street',
       address2: null,
-      district: 'Hauer',
-      city: 'Curitiba',
-      state: 'PR',
-      postalCode: '81630-130',
+      district: 'Twenty-first',
+      city: 'São Paulo',
+      state: 'SP',
+      postalCode: '10000-000',
       userId: '801482a1-6d71-4408-a91a-6829c62c6efd',
     };
   });
@@ -42,6 +42,6 @@ describe('Get addresses (use-case)', () => {
       'userId'
     >[];
 
-    expect(addresses[0].address).toBe('R. Conde São João Duas Barra, 847');
+    expect(addresses[0].address).toBe(addressData.address);
   });
 });
