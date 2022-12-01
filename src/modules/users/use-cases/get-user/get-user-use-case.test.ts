@@ -26,7 +26,7 @@ describe('Get user (use case)', () => {
     };
   });
 
-  it('Should return a user id and email', async () => {
+  it('Should return a Json Web Token', async () => {
     await createUserUseCase.execute(userData);
 
     const response = await getUserUseCase.execute({
@@ -37,7 +37,7 @@ describe('Get user (use case)', () => {
     expect(response).toHaveProperty('value');
   });
 
-  it('Should be not able to return a user when email does not exist', async () => {
+  it('Should be not able to return a JWT, if email has not registered', async () => {
     const response = await getUserUseCase.execute({
       email: 'test@example.com',
       password: '@Test1234',
@@ -46,7 +46,7 @@ describe('Get user (use case)', () => {
     expect(response.value).toStrictEqual(new ValidationError({}));
   });
 
-  it('Should be not able to return a user when password is wrong', async () => {
+  it('Should be not able to return a JWT when password is wrong', async () => {
     await createUserUseCase.execute(userData);
 
     const response = await getUserUseCase.execute({
