@@ -15,6 +15,7 @@ describe('Create a new address (use-case)', () => {
   beforeAll(() => {
     addressRepository = new InMemoryAddressRepository();
     createAddressUseCase = new CreateAddressUseCase(addressRepository);
+
     addressData = {
       name: 'Home',
       address: '20, Twentieth Street',
@@ -27,7 +28,7 @@ describe('Create a new address (use-case)', () => {
     };
   });
 
-  it('Should be able to add a new address', async () => {
+  it('Should be able to create a new address', async () => {
     await createAddressUseCase.execute(addressData);
 
     const addresses = (await addressRepository.findAddressesByUserId(
@@ -37,7 +38,7 @@ describe('Create a new address (use-case)', () => {
     expect(addresses[0].address).toBe(addressData.address);
   });
 
-  it('Should be not able to add a existing address', async () => {
+  it('Should be not able to create an existing address', async () => {
     const response = await createAddressUseCase.execute(addressData);
 
     expect(response.value).toStrictEqual(new AddressAlreadyRegisteredError({}));
