@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid';
 
 describe('PUT /v1/address (controller)', () => {
   let cookie: string[];
-  let createJwtToken: request.Response;
   beforeAll(async () => {
     await request(app).post('/v1/users').send({
       firstName: 'Ana',
@@ -14,12 +13,12 @@ describe('PUT /v1/address (controller)', () => {
       phone: '(11) 98888-8888',
     });
 
-    createJwtToken = await request(app).get('/v1/user').send({
+    const createJwt = await request(app).get('/v1/user').send({
       email: 'ana@example.com',
       password: '@Test123',
     });
 
-    cookie = createJwtToken.get('Set-Cookie') as string[];
+    cookie = createJwt.get('Set-Cookie');
 
     await request(app)
       .post('/v1/addresses')
@@ -39,6 +38,7 @@ describe('PUT /v1/address (controller)', () => {
     const addresses = await request(app)
       .get('/v1/addresses')
       .set('Cookie', cookie);
+
     const response = await request(app)
       .put('/v1/address')
       .send({
