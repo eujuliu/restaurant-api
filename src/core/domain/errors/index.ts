@@ -51,12 +51,11 @@ export class ValidationError extends BaseError {
   }
 }
 
-export class NotFoundError extends BaseError {
+export class ResourceNotFoundError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || 'Probably this data does not exist',
-      action:
-        action || 'Please verify if you are accessing the correct location',
+      message: message || 'Non resource found in the database',
+      action: action || 'Try again with another data',
       errorId: errorId,
       statusCode: statusCode || 404,
     });
