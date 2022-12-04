@@ -50,14 +50,3 @@ export class ValidationError extends BaseError {
     });
   }
 }
-
-export class ResourceNotFoundError extends BaseError {
-  constructor({ message, action, errorId, statusCode }: ErrorProps) {
-    super({
-      message: message || 'Non resource found in the database',
-      action: action || 'Try again with another data',
-      errorId: errorId,
-      statusCode: statusCode || 404,
-    });
-  }
-}
