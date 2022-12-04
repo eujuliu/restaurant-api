@@ -41,4 +41,12 @@ export class InMemoryAddressRepository implements IAddressesRepository {
       postalCode,
     });
   }
+
+  async delete(id: string): Promise<void> {
+    const addressIndex = this.addresses.findIndex(
+      (address) => address.id === id
+    );
+
+    this.addresses.splice(addressIndex, 1);
+  }
 }

@@ -17,4 +17,5 @@ export interface IAddressesRepository {
   ): Promise<Omit<PersistenceAddress, 'userId'>[]>;
   findAddressById(id: string): Promise<PersistenceAddress | null>;
   update(id: string, data: updateData): Promise<void>;
+  delete(id: string): Promise<void>;
 }

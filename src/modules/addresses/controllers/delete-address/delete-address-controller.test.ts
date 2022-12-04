@@ -2,19 +2,19 @@ import { app } from 'infra/http/app';
 import request from 'supertest';
 import { v4 as uuid } from 'uuid';
 
-describe('PUT /v1/address (controller)', () => {
+describe('DELETE /v1/address', () => {
   let cookie: string[];
   beforeAll(async () => {
     await request(app).post('/v1/users').send({
-      firstName: 'Ana',
+      firstName: 'Julia',
       lastName: 'Doe',
-      email: 'ana@example.com',
+      email: 'julia@example.com',
       password: '@Test123',
       phone: '(11) 98888-8888',
     });
 
     const createJwt = await request(app).get('/v1/user').send({
-      email: 'ana@example.com',
+      email: 'julia@example.com',
       password: '@Test123',
     });
 
@@ -24,40 +24,35 @@ describe('PUT /v1/address (controller)', () => {
       .post('/v1/addresses')
       .send({
         name: 'Home',
-        address: '222, Twenty-second Street',
+        address: '23, Twenty-third Street',
         address2: null,
-        district: 'Twenty-second',
+        district: 'Twenty-third',
         city: 'São Paulo',
         state: 'SP',
         postalCode: '10000-000',
       })
       .set('Cookie', cookie);
   });
-
-  it('Should be able to update an address', async () => {
+  it('Should be able to delete an existing address', async () => {
     const addresses = await request(app)
       .get('/v1/addresses')
       .set('Cookie', cookie);
 
     const response = await request(app)
-      .put('/v1/address')
+      .delete('/v1/address')
       .send({
         id: addresses.body[0].id as string,
-        name: 'Work',
-        address: '22, Twenty-second Street',
       })
       .set('Cookie', cookie);
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(202);
   });
 
-  it('Should be not able to update a non existing address', async () => {
+  it('Should be not able to delete a non existing address', async () => {
     const response = await request(app)
-      .put('/v1/address')
+      .delete('/v1/address')
       .send({
         id: uuid(),
-        name: 'Work',
-        address: '22, Twenty-second Street',
       })
       .set('Cookie', cookie);
 

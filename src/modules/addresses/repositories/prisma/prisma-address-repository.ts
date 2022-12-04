@@ -80,4 +80,12 @@ export class PrismaAddressRepository implements IAddressesRepository {
       },
     });
   }
+
+  async delete(id: string): Promise<void> {
+    await prisma.address.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

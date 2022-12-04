@@ -1,4 +1,4 @@
-import { ResourceNotFoundError } from 'core/domain/errors';
+import { ValidationError } from 'core/domain/errors';
 import { IAddressesRepository } from 'modules/addresses/repositories/addresses-repository';
 import { InMemoryAddressRepository } from 'modules/addresses/repositories/in-memory/in-memory-address-repository';
 import {
@@ -54,6 +54,6 @@ describe('Update address (use-case)', () => {
       address: '22, Twenty-second Street',
     });
 
-    expect(response.value).toStrictEqual(new ResourceNotFoundError({}));
+    expect(response.value).toStrictEqual(new ValidationError({}));
   });
 });

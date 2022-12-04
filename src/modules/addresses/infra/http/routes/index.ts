@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { createAddressFactory } from 'modules/addresses/factories/create-address-factory';
+import { deleteAddressFactory } from 'modules/addresses/factories/delete-address-factory';
 import { getAddressesFactory } from 'modules/addresses/factories/get-addresses-factory';
 import { updateAddressFactory } from 'modules/addresses/factories/update-address-factory';
 
@@ -15,6 +16,10 @@ addressRouter.put('/address', (request, response) => {
 
 addressRouter.get('/addresses', (request, response) => {
   return getAddressesFactory().handle(request, response);
+});
+
+addressRouter.delete('/address', (request, response) => {
+  return deleteAddressFactory().handle(request, response);
 });
 
 export { addressRouter };
