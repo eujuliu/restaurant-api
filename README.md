@@ -5,10 +5,9 @@
   - [x] Login and Register
     - [x] can register with unique email
     - [x] can connect to your account with email and password
-  - [ ] Account Settings
+  - [x] Account Settings
     - [x] can change your password
-    - [ ] can add, remove or update your addresses
-    - [ ] can logout
+    - [x] can add, remove or update your addresses
   - [ ] Orders
     - [ ] can buy a product
     - [ ] can pay for the product or cancel the open order
