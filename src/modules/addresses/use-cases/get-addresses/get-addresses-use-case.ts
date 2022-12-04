@@ -1,4 +1,4 @@
-import { ResourceNotFoundError } from 'core/domain/errors';
+import { ValidationError } from 'core/domain/errors';
 import { UseCase } from 'core/domain/UseCase';
 import { Either, left, right } from 'core/logic/either';
 import { PersistenceAddress } from 'modules/addresses/mappers/address-map';
@@ -9,7 +9,7 @@ export interface GetAddressesRequest {
 }
 
 type GetAddressesResponse = Either<
-  ResourceNotFoundError,
+  ValidationError,
   Omit<PersistenceAddress, 'userId'>[]
 >;
 
@@ -25,7 +25,7 @@ export class GetAddressesUseCase
     );
 
     if (!addresses) {
-      return left(new ResourceNotFoundError({}));
+      return left(new ValidationError({ message: 'Not found any addresses' }));
     }
 
     return right(addresses);

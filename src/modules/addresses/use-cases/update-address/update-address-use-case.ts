@@ -1,4 +1,4 @@
-import { ResourceNotFoundError } from 'core/domain/errors';
+import { ValidationError } from 'core/domain/errors';
 import { UseCase } from 'core/domain/UseCase';
 import { Either, left, right } from 'core/logic/either';
 import { PostalCodeInvalidError } from 'modules/addresses/domain/errors';
@@ -17,7 +17,7 @@ export interface UpdateAddressRequest {
 }
 
 type UpdateAddressResponse = Either<
-  ResourceNotFoundError | PostalCodeInvalidError,
+  ValidationError | PostalCodeInvalidError,
   null | void
 >;
 
@@ -38,7 +38,7 @@ export class UpdateAddressUseCase
     const addressExists = await this.addressRepository.findAddressById(id);
 
     if (!addressExists) {
-      return left(new ResourceNotFoundError({}));
+      return left(new ValidationError({}));
     }
 
     if (postalCode) {
