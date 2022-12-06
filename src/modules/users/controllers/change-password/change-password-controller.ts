@@ -15,13 +15,13 @@ export interface ChangePasswordBodyProps {
 export class ChangePasswordController {
   constructor(private changePasswordUseCase: ChangePasswordUseCase) {}
   async handle(request: Request, response: Response) {
-    if (!request.cookies.session_id) {
-      return response.status(401).json(new ValidationError({}));
-    }
+    const {
+      oldPassword,
+      newPassword,
+      confirmNewPassword,
+    }: ChangePasswordBodyProps = request.body;
 
-    const body: ChangePasswordBodyProps = request.body;
-
-    if (bodyPropsIsEmpty(body)) {
+    if (bodyPropsIsEmpty({ oldPassword, newPassword, confirmNewPassword })) {
       return response.status(400).json(
         new ValidationError({
           message: 'Some field is empty',
@@ -31,11 +31,10 @@ export class ChangePasswordController {
     }
 
     try {
-      const { oldPassword, newPassword, confirmNewPassword } = body;
-      const decoded = jwt.verify(await request.cookies.session_id, SECRET);
+      const decoded: { email: string } = response.locals.decoded_token;
 
       const responseOrError = await this.changePasswordUseCase.execute({
-        email: (<{ email: string }>decoded).email,
+        email: decoded.email,
         oldPassword,
         newPassword,
         confirmNewPassword,

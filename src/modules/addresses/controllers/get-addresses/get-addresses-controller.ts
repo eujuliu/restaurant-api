@@ -1,21 +1,15 @@
-import { InternalServerError, ValidationError } from 'core/domain/errors';
+import { InternalServerError } from 'core/domain/errors';
 import { Request, Response } from 'express';
 import { GetAddressesUseCase } from 'modules/addresses/use-cases/get-addresses/get-addresses-use-case';
-import jwt from 'jsonwebtoken';
-import { SECRET } from 'config';
 
 export class GetAddressesController {
   constructor(private getAddressesUseCase: GetAddressesUseCase) {}
   async handle(request: Request, response: Response) {
-    if (!request.cookies.session_id) {
-      return response.status(401).json(new ValidationError({}));
-    }
-
     try {
-      const decoded = jwt.verify(await request.cookies.session_id, SECRET);
+      const decoded_token: { id: string } = response.locals.decoded_token;
 
       const responseOrError = await this.getAddressesUseCase.execute({
-        userId: (<{ id: string }>decoded).id,
+        userId: decoded_token.id,
       });
 
       if (responseOrError.isLeft()) {

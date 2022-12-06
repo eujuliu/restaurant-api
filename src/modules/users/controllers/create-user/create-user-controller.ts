@@ -14,9 +14,9 @@ export interface CreateUserBodyProps {
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
   async handle(request: Request, response: Response) {
-    const body: CreateUserBodyProps = await request.body;
+    const { firstName, lastName, email, password, phone } = request.body;
 
-    if (bodyPropsIsEmpty(body)) {
+    if (bodyPropsIsEmpty({ firstName, lastName, email, password, phone })) {
       return response.status(400).json(
         new ValidationError({
           message: 'Some field is empty',
@@ -26,7 +26,6 @@ export class CreateUserController {
     }
 
     try {
-      const { firstName, lastName, email, password, phone } = body;
       const responseOrError = await this.createUserUseCase.execute({
         firstName,
         lastName,

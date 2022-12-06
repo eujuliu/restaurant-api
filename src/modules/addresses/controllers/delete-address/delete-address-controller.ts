@@ -10,10 +10,6 @@ interface DeleteAddressBodyProps {
 export class DeleteAddressController {
   constructor(private deleteAddressUseCase: DeleteAddressUseCase) {}
   async handle(request: Request, response: Response) {
-    if (!request.cookies.session_id) {
-      return response.status(401).json(new ValidationError({}));
-    }
-
     const { id }: DeleteAddressBodyProps = await request.body;
 
     if (bodyPropsIsEmpty({ id })) {

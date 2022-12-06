@@ -17,10 +17,6 @@ interface UpdateAddressBodyProps {
 export class UpdateAddressController {
   constructor(private updateAddressUseCase: UpdateAddressUseCase) {}
   async handle(request: Request, response: Response) {
-    if (!request.cookies.session_id) {
-      return response.status(401).json(new ValidationError({}));
-    }
-
     const {
       id,
       name,
