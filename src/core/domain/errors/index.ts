@@ -50,3 +50,14 @@ export class ValidationError extends BaseError {
     });
   }
 }
+
+export class TokenError extends BaseError {
+  constructor({ message, action, errorId, statusCode }: ErrorProps) {
+    super({
+      message: message || 'Invalid token',
+      action: action || 'If you are not authenticated, please authenticate',
+      errorId: errorId,
+      statusCode: statusCode || 400,
+    });
+  }
+}

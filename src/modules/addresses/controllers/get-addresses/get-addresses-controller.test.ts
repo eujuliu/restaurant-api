@@ -13,12 +13,12 @@ describe('GET /v1/addresses', () => {
   });
 
   it('Should be able to return all user addresses', async () => {
-    const createJwt = await request(app).get('/v1/user').send({
+    const createJwt = await request(app).post('/v1/user').send({
       email: 'lucas@example.com',
       password: '@Test123',
     });
 
-    const cookie = createJwt.get('Set-Cookie');
+    const token = createJwt.get('Set-Cookie')[0].split('; ')[0].split('=')[1];
 
     await request(app)
       .post('/v1/addresses')
@@ -31,11 +31,11 @@ describe('GET /v1/addresses', () => {
         state: 'SP',
         postalCode: '10000-000',
       })
-      .set('Cookie', cookie);
+      .set('Authorization', `Bearer ${token}`);
 
     const addresses = await request(app)
       .get('/v1/addresses')
-      .set('Cookie', cookie);
+      .set('Authorization', `Bearer ${token}`);
 
     expect(addresses.body[0].address).toBe('21 Twenty-first Street');
   });

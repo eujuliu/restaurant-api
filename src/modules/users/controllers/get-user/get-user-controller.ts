@@ -35,8 +35,8 @@ export class GetUserController {
           .json(responseOrError.value);
       }
 
-      if (!request.cookies.session_id) {
-        response.cookie('session_id', responseOrError.value, {
+      if (!request.cookies.token) {
+        response.cookie('token', responseOrError.value, {
           secure: true,
           httpOnly: true,
           sameSite: 'lax',

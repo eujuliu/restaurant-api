@@ -13,12 +13,15 @@ describe('POST /v1/addresses (controller)', () => {
   });
 
   it('Should be able to create a new address', async () => {
-    const getUserResponse = await request(app).get('/v1/user').send({
+    const getUserResponse = await request(app).post('/v1/user').send({
       email: 'jennifer@example.com',
       password: '@Test123',
     });
 
-    const cookie = getUserResponse.get('Set-Cookie') as string[];
+    const token = getUserResponse
+      .get('Set-Cookie')[0]
+      .split('; ')[0]
+      .split('=')[1];
 
     const response = await request(app)
       .post('/v1/addresses')
@@ -31,7 +34,7 @@ describe('POST /v1/addresses (controller)', () => {
         state: 'SP',
         postalCode: '10000-000',
       })
-      .set('Cookie', cookie);
+      .set('Authorization', `Bearer ${token}`);
 
     expect(response.status).toBe(201);
   });

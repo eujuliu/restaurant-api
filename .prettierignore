@@ -1,3 +1,4 @@
 node_modules
 .husky
-src/infra/prisma/migrations
+src/infra/prisma/**
+docs/

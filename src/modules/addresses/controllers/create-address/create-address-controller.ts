@@ -1,9 +1,8 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { InternalServerError, ValidationError } from 'core/domain/errors';
 import { bodyPropsIsEmpty } from 'core/domain/utils/body-props-is-empty';
 import { CreateAddressUseCase } from 'modules/addresses/use-cases/create-address/create-address-use-case';
-import jwt from 'jsonwebtoken';
-import { SECRET } from 'config';
+import { CustomRequest } from 'infra/http/middleware/auth';
 
 export interface CreateAddressBodyProps {
   name: string;
@@ -17,11 +16,7 @@ export interface CreateAddressBodyProps {
 
 export class CreateAddressController {
   constructor(private createAddressUseCase: CreateAddressUseCase) {}
-  async handle(request: Request, response: Response) {
-    if (!request.cookies.session_id) {
-      return response.status(401).json(new ValidationError({}));
-    }
-
+  async handle(request: CustomRequest, response: Response) {
     const {
       name,
       address,
@@ -42,7 +37,7 @@ export class CreateAddressController {
     }
 
     try {
-      const decoded = jwt.verify(await request.cookies.session_id, SECRET);
+      const decoded = request.decoded as { id: string };
       const responseOrError = await this.createAddressUseCase.execute({
         name,
         address,
@@ -51,7 +46,7 @@ export class CreateAddressController {
         city,
         state,
         postalCode,
-        userId: (<{ id: string }>decoded).id,
+        userId: decoded.id,
       });
 
       if (responseOrError.isLeft()) {

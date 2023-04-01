@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
+import 'dotenv/config';
+
+import { Response } from 'express';
 import { ChangePasswordUseCase } from 'modules/users/use-cases/change-password/change-password-use-case';
 import { InternalServerError, ValidationError } from 'core/domain/errors';
-import { SECRET } from 'config';
-import jwt from 'jsonwebtoken';
-import 'dotenv/config';
 import { bodyPropsIsEmpty } from 'core/domain/utils/body-props-is-empty';
+import { CustomRequest } from 'infra/http/middleware/auth';
 
 export interface ChangePasswordBodyProps {
   oldPassword: string;
@@ -14,7 +14,7 @@ export interface ChangePasswordBodyProps {
 
 export class ChangePasswordController {
   constructor(private changePasswordUseCase: ChangePasswordUseCase) {}
-  async handle(request: Request, response: Response) {
+  async handle(request: CustomRequest, response: Response) {
     const {
       oldPassword,
       newPassword,
@@ -31,7 +31,7 @@ export class ChangePasswordController {
     }
 
     try {
-      const decoded: { email: string } = response.locals.decoded_token;
+      const decoded = request.decoded as { email: string };
 
       const responseOrError = await this.changePasswordUseCase.execute({
         email: decoded.email,

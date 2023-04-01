@@ -16,7 +16,10 @@
     "lint": "prettier --check src/**",
     "lint:fix": "eslint src/** --fix && prettier --write src/**",
     "migrate:dev": "prisma migrate dev",
-    "migrate:deploy": "prisma migrate deploy"
+    "migrate:deploy": "prisma migrate deploy",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [],
   "author": "",
@@ -48,7 +51,8 @@
     "ts-jest": "^29.0.3",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "vitepress": "^1.0.0-alpha.63"
   },
   "dependencies": {
     "@prisma/client": "^4.6.1",
@@ -59,7 +63,7 @@
     "dotenv": "^16.0.3",
     "dotenv-cli": "^6.0.0",
     "express": "^4.18.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^8.8.0",
     "uuid": "^9.0.0",
     "validator": "^13.7.0"

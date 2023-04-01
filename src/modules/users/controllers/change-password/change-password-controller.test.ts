@@ -17,14 +17,14 @@ describe('PUT /v1/user/security (controller)', () => {
 
     await request(app).post('/v1/users').send(userData);
 
-    returnJwt = await request(app).get('/v1/user').send({
+    returnJwt = await request(app).post('/v1/user').send({
       email: 'jonathan@example.com',
       password: '@Test123',
     });
   });
 
   it('Should be able to change the user password', async () => {
-    const cookie: string[] = returnJwt.get('Set-Cookie');
+    const token = returnJwt.get('Set-Cookie')[0].split('; ')[0].split('=')[1];
 
     const response = await request(app)
       .put('/v1/user/security')
@@ -33,13 +33,13 @@ describe('PUT /v1/user/security (controller)', () => {
         newPassword: '@Other321',
         confirmNewPassword: '@Other321',
       })
-      .set('Cookie', cookie);
+      .set('Authorization', `Bearer ${token}`);
 
     expect(response.status).toBe(200);
   });
 
   it('Should be not able to change the password, if the old password is wrong', async () => {
-    const cookie: string[] = returnJwt.get('Set-Cookie');
+    const token = returnJwt.get('Set-Cookie')[0].split('; ')[0].split('=')[1];
 
     const response = await request(app)
       .put('/v1/user/security')
@@ -48,7 +48,7 @@ describe('PUT /v1/user/security (controller)', () => {
         newPassword: '@Other321',
         confirmNewPassword: '@Other321',
       })
-      .set('Cookie', cookie);
+      .set('Authorization', `Bearer ${token}`);
 
     expect(response.status).toBe(400);
   });
