@@ -27,23 +27,25 @@ Below you can see the default errors messages
 #### Weak password
 
 If you pass a weak password, you will get a `InsecurePasswordError`, you need to pass a password that follow the following pattern:
- - minimum 1 uppercase
- - minimum 1 lowercase
- - minimum length is 8
- - minimum 1 number
- - minimum 1 symbol
+
+- minimum 1 uppercase
+- minimum 1 lowercase
+- minimum length is 8
+- minimum 1 number
+- minimum 1 symbol
 
 Below is the `InsecurePasswordError` result, with `400` status code:
 
 ```json
 {
-	"name": "InsecurePasswordError",
-	"message": "This password is not secure.",
-	"action": "Try another password",
-	"statusCode": 400,
-	"errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
+  "name": "InsecurePasswordError",
+  "message": "This password is not secure.",
+  "action": "Try another password",
+  "statusCode": 400,
+  "errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
 }
 ```
+
 #### Email already registered
 
 If you pass an email address that is already registered, you will get the `AccountAlreadyExistsError` with the following message and status code `400`:
@@ -51,9 +53,9 @@ If you pass an email address that is already registered, you will get the `Accou
 ```json
 {
   "name": "AccountAlreadyExistsError",
-	"message": "Already exists a user registered with this email address",
-	"action": "If is you, try logging",
-	"statusCode": 400,
-	"errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
+  "message": "Already exists a user registered with this email address",
+  "action": "If is you, try logging",
+  "statusCode": 400,
+  "errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
 }
 ```

@@ -4,14 +4,14 @@ For update an address you need to do a `POST` request to `https://your-domain/v1
 
 ```json
 {
-	"id": "2112de33-7b56-4836-845c-14977c59d5ea",
-	"name": "Home",
-	"address": "20, Twentieth Street",
-	"address2": null,
-	"district": "Twentieth",
-	"city": "São Paulo",
-	"state": "SP",
-	"postalCode": "10000-000"
+  "id": "2112de33-7b56-4836-845c-14977c59d5ea",
+  "name": "Home",
+  "address": "20, Twentieth Street",
+  "address2": null,
+  "district": "Twentieth",
+  "city": "São Paulo",
+  "state": "SP",
+  "postalCode": "10000-000"
 }
 ```
 
@@ -35,10 +35,10 @@ If you send the wrong ID, you will receive a `ValidationError` and `400` status 
 
 ```json
 {
-	"name": "ValidationError",
-	"message": "A validation error occurred",
-	"action": "Change the data and try again",
-	"statusCode": 400,
-	"errorId": "9c0cebd3-653b-420a-b5be-652cb34c9889"
+  "name": "ValidationError",
+  "message": "A validation error occurred",
+  "action": "Change the data and try again",
+  "statusCode": 400,
+  "errorId": "9c0cebd3-653b-420a-b5be-652cb34c9889"
 }
 ```

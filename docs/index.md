@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "Restaurant API"
-  text: "A API for your restaurant"
+  name: 'Restaurant API'
+  text: 'A API for your restaurant'
   tagline: A restaurant API developed with Node.js and TypeScript
   actions:
     - theme: brand
@@ -22,4 +22,3 @@ features:
   - title: Managing Orders
     details: With this API you can create, update and delete orders
 ---
-

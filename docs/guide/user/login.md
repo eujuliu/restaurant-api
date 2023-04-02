@@ -5,7 +5,7 @@ If you create a new user now you can login in this user and get your token for a
 ```json
 {
   "email": "john@due.com",
-  "password": "!Test1234",
+  "password": "!Test1234"
 }
 ```
 
@@ -31,10 +31,10 @@ If one of the data or all data is wrong, you will get the following error with a
 
 ```json
 {
-	"name": "ValidationError",
-	"message": "A validation error occurred",
-	"action": "Change the data and try again",
-	"statusCode": 400,
-	"errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
+  "name": "ValidationError",
+  "message": "A validation error occurred",
+  "action": "Change the data and try again",
+  "statusCode": 400,
+  "errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
 }
 ```

@@ -73,7 +73,7 @@
     "schema": "./src/infra/prisma/schema.prisma"
   },
   "lint-staged": {
-    "*.ts": [
+    "src/**": [
       "npx eslint 'src/**' --fix",
       "npx prettier --check 'src/**'"
     ]

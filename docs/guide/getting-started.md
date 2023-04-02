@@ -15,14 +15,17 @@ npm install
 ```
 
 or with yarn
+
 ```bash
 yarn
 ```
 
 or with pnpm
+
 ```bash
 pnpm install
 ```
+
 ## Database
 
 This project use the ORM **Prisma** with **PostgreSQL** database, then for do something you need to install the postgresql and configure, here the [PostgreSQL Website](https://www.postgresql.org/) or if you have **Docker** installed, you can run the following command.
@@ -34,6 +37,7 @@ docker run --name postgres -p 5432:5433 -e POSTGRES_USER=admin -e POSTGRES_PASSW
 you can change the -e (Environment) values with something that you prefer
 
 Then, you need to create a `.env` file and and the following key-values:
+
 ```
 PORT= the post number of the server
 DATABASE_URL= the database url, is like this: postgresql://johndoe:randompassword@localhost:5432/mydb

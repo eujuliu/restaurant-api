@@ -4,7 +4,7 @@ If you want to delete an address, you need to do a `DELETE` request to `https://
 
 ```json
 {
-	"id": "2112de33-7b56-4836-845c-14977c59d5ea"
+  "id": "2112de33-7b56-4836-845c-14977c59d5ea"
 }
 ```
 
@@ -28,10 +28,10 @@ If you pass an ID from an address that does not exist, you will receive the `400
 
 ```json
 {
-	"name": "ValidationError",
-	"message": "Not found any address with this id",
-	"action": "Change the data and try again",
-	"statusCode": 400,
-	"errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
+  "name": "ValidationError",
+  "message": "Not found any address with this id",
+  "action": "Change the data and try again",
+  "statusCode": 400,
+  "errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
 }
 ```

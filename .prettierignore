@@ -1,4 +1,5 @@
-node_modules
-.husky
-src/infra/prisma/**
-docs/
+**/node_modules
+**/.husky
+**/src/infra/prisma/
+docs/.vitepress/cache
+**/.github

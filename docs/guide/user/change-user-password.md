@@ -6,9 +6,9 @@ First, you need to pass the following data:
 
 ```json
 {
-	"oldPassword": "!Test1234",
-	"newPassword": "!Test4321",
-	"confirmNewPassword": "!Test4321"
+  "oldPassword": "!Test1234",
+  "newPassword": "!Test4321",
+  "confirmNewPassword": "!Test4321"
 }
 ```
 
@@ -32,11 +32,11 @@ If the old password is incorrect, you will get a `ValidationError` and `400` sta
 
 ```json
 {
-	"name": "ValidationError",
-	"message": "A validation error occurred",
-	"action": "Change the data and try again",
-	"statusCode": 400,
-	"errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
+  "name": "ValidationError",
+  "message": "A validation error occurred",
+  "action": "Change the data and try again",
+  "statusCode": 400,
+  "errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
 }
 ```
 
@@ -46,11 +46,11 @@ If the new password is weak, you will get a `InsecurePasswordError` and `400` st
 
 ```json
 {
-	"name": "InsecurePasswordError",
-	"message": "This password is not secure.",
-	"action": "Try another password",
-	"statusCode": 400,
-	"errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
+  "name": "InsecurePasswordError",
+  "message": "This password is not secure.",
+  "action": "Try another password",
+  "statusCode": 400,
+  "errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
 }
 ```
 
@@ -60,10 +60,10 @@ If the new password does not match, you will get a `PasswordsDoesNotMatchError` 
 
 ```json
 {
-	"name": "PasswordsDoesNotMatchError",
-	"message": "Passwords does not match",
-	"action": "Re-write the passwords and try again",
-	"statusCode": 400,
-	"errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
+  "name": "PasswordsDoesNotMatchError",
+  "message": "Passwords does not match",
+  "action": "Re-write the passwords and try again",
+  "statusCode": 400,
+  "errorId": "ddc0b600-a6a3-4001-8339-b0de1bacb9a0"
 }
 ```
