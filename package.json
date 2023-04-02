@@ -17,9 +17,9 @@
     "lint:fix": "eslint src/** --fix && prettier --write src/**",
     "migrate:dev": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
-    "docs:dev": "vitepress dev test",
-    "docs:build": "vitepress build test",
-    "docs:preview": "vitepress preview test"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [],
   "author": "",
