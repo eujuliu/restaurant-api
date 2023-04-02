@@ -2,4 +2,5 @@
 **/.husky
 **/src/infra/prisma/
 docs/.vitepress/cache
+docs/.vitepress/dist
 **/.github
