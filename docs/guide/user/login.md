@@ -27,7 +27,7 @@ If the data is invalid, you will get an error.
 
 #### Some data is wrong
 
-If one of the data or all data is wrong, you will get the following error with a `400` status code.
+If one of the data or all data is wrong, you will receive `ValidationError` error and a `400` status code.
 
 ```json
 {

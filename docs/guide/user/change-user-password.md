@@ -22,13 +22,13 @@ Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwi
 
 ### Success
 
-If you follow the instructions correctly, you will get a `200` status code without body message.
+If you follow the instructions correctly, you will receive a `200` status code without body message.
 
 ### Error
 
 #### Old password is wrong
 
-If the old password is incorrect, you will get a `ValidationError` and `400` status code with the following error message:
+If the old password is incorrect, you will receive a `ValidationError` error and `400` status code with the following error message:
 
 ```json
 {
@@ -42,7 +42,7 @@ If the old password is incorrect, you will get a `ValidationError` and `400` sta
 
 #### New password is weak
 
-If the new password is weak, you will get a `InsecurePasswordError` and `400` status code with the following error message:
+If the new password is weak, you will get a `InsecurePasswordError` error and `400` status code with the following error message:
 
 ```json
 {

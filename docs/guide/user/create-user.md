@@ -3,11 +3,13 @@
 For create a new user, you need to do a `POST` request to `https://your-domain/v1/users` and pass the following data in the body:
 
 ```json
-"firstName": "John",
-"lastName": "Due",
-"email": "john@due.com",
-"password": "!Test1234",
-"phone": "00000000000"
+{
+  "firstName": "John",
+  "lastName": "Due",
+  "email": "john@due.com",
+  "password": "!Test1234",
+  "phone": "00000000000"
+}
 ```
 
 is obviously that you need to pass your data, not the data in the example.
