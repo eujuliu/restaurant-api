@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: 'Restaurant API'
-  text: 'A API for your restaurant'
+  text: 'A complete API for your restaurant'
   tagline: A restaurant API developed with Node.js and TypeScript
   actions:
     - theme: brand
