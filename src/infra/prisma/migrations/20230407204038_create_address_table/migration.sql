@@ -6,6 +6,8 @@ CREATE TABLE "Address" (
     "address2" VARCHAR(45),
     "district" VARCHAR(50),
     "state" VARCHAR(2),
+    "created_at" VARCHAR(25) NOT NULL,
+    "updated_at" VARCHAR(25) NOT NULL,
     "city" VARCHAR(35) NOT NULL,
     "postalCode" VARCHAR(15) NOT NULL,
     "userId" TEXT NOT NULL,

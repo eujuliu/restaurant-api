@@ -11,6 +11,8 @@ export interface PersistenceUser {
   password: string;
   phone: string;
   emailIsVerified: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export class UserMap {
@@ -22,6 +24,8 @@ export class UserMap {
     password,
     phone,
     emailIsVerified,
+    createdAt,
+    updatedAt,
   }: User): Promise<PersistenceUser> {
     return {
       id,
@@ -31,6 +35,8 @@ export class UserMap {
       password: await password.getHashedValue(),
       phone: phone.value,
       emailIsVerified,
+      created_at: createdAt,
+      updated_at: updatedAt,
     };
   }
 
@@ -42,6 +48,8 @@ export class UserMap {
     password,
     phone,
     emailIsVerified,
+    created_at,
+    updated_at,
   }: PersistenceUser): User {
     const emailOrError = Email.create(email);
     const passwordOrError = Password.create({
@@ -58,6 +66,8 @@ export class UserMap {
         password: passwordOrError.value as Password,
         phone: phoneOrError.value as Phone,
         emailIsVerified,
+        createdAt: created_at,
+        updatedAt: updated_at,
       },
       id
     );

@@ -56,6 +56,7 @@ export class UpdateAddressUseCase
         city,
         state,
         postalCode: postalCodeOrError.value.value,
+        updated_at: new Date().toJSON(),
       });
 
       return right(null);
@@ -68,6 +69,7 @@ export class UpdateAddressUseCase
       district,
       city,
       state,
+      updated_at: new Date().toJSON(),
     });
 
     return right(null);

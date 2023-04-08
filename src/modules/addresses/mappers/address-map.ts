@@ -11,6 +11,8 @@ export interface PersistenceAddress {
   state: string | null;
   postalCode: string;
   userId: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export class AddressMap {
@@ -24,6 +26,8 @@ export class AddressMap {
     state,
     postalCode,
     userId,
+    createdAt,
+    updatedAt,
   }: Address): PersistenceAddress {
     return {
       id,
@@ -35,6 +39,8 @@ export class AddressMap {
       state,
       postalCode: postalCode.value,
       userId,
+      created_at: createdAt,
+      updated_at: updatedAt,
     };
   }
 
@@ -48,6 +54,8 @@ export class AddressMap {
     state,
     postalCode,
     userId,
+    created_at,
+    updated_at,
   }: PersistenceAddress): Address {
     const postalCodeOrError = PostalCode.create(postalCode);
 
@@ -61,6 +69,8 @@ export class AddressMap {
         state,
         postalCode: postalCodeOrError.value as PostalCode,
         userId,
+        createdAt: created_at,
+        updatedAt: updated_at,
       },
       id
     );

@@ -11,6 +11,8 @@ export class PrismaUsersRepository implements IUsersRepository {
     password,
     emailIsVerified,
     phone,
+    created_at,
+    updated_at,
   }: PersistenceUser): Promise<void> {
     await prisma.user.create({
       data: {
@@ -21,6 +23,8 @@ export class PrismaUsersRepository implements IUsersRepository {
         password,
         emailIsVerified,
         phone,
+        created_at,
+        updated_at,
       },
     });
   }

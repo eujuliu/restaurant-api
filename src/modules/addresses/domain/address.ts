@@ -25,6 +25,9 @@ export class Address {
   readonly city: string;
   readonly postalCode: PostalCode;
   readonly userId: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+
   constructor(
     {
       name,
@@ -35,6 +38,8 @@ export class Address {
       state,
       postalCode,
       userId,
+      createdAt,
+      updatedAt,
     }: Omit<Address, 'id'>,
     id?: string
   ) {
@@ -48,6 +53,8 @@ export class Address {
       state,
       postalCode,
       userId,
+      createdAt,
+      updatedAt,
     });
   }
 
@@ -80,6 +87,8 @@ export class Address {
         city,
         state,
         userId,
+        createdAt: new Date().toJSON(),
+        updatedAt: new Date().toJSON(),
         postalCode: postalCodeOrError.value,
       })
     );

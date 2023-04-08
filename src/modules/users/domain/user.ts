@@ -26,6 +26,8 @@ export class User {
   readonly password: Password;
   readonly phone: Phone;
   readonly emailIsVerified: boolean;
+  readonly createdAt: string;
+  readonly updatedAt: string;
 
   constructor(
     {
@@ -35,6 +37,8 @@ export class User {
       password,
       phone,
       emailIsVerified,
+      createdAt,
+      updatedAt,
     }: Omit<User, 'id'>,
     id?: string
   ) {
@@ -46,6 +50,8 @@ export class User {
       password,
       phone,
       emailIsVerified,
+      createdAt,
+      updatedAt,
     });
   }
 
@@ -84,6 +90,8 @@ export class User {
         email: emailOrError.value,
         password: passwordOrError.value,
         phone: phoneOrError.value,
+        createdAt: new Date().toJSON(),
+        updatedAt: new Date().toJSON(),
         emailIsVerified,
       })
     );

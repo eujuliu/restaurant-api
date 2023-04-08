@@ -8,6 +8,7 @@ export interface updateData {
   city?: string;
   state?: string;
   postalCode?: string;
+  updated_at: string;
 }
 
 export interface IAddressesRepository {

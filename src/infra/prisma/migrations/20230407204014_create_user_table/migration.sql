@@ -4,6 +4,8 @@ CREATE TABLE "User" (
     "firstName" VARCHAR(50) NOT NULL,
     "lastName" VARCHAR(50) NOT NULL,
     "email" TEXT NOT NULL,
+    "created_at" VARCHAR(25) NOT NULL,
+    "updated_at" VARCHAR(25) NOT NULL,
     "password" TEXT NOT NULL,
     "phone" VARCHAR(15) NOT NULL,
     "emailIsVerified" BOOLEAN NOT NULL DEFAULT false,

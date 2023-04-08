@@ -13,6 +13,8 @@ export class PrismaAddressRepository implements IAddressesRepository {
     state,
     postalCode,
     userId,
+    created_at,
+    updated_at,
   }: PersistenceAddress): Promise<void> {
     await prisma.address.create({
       data: {
@@ -25,6 +27,8 @@ export class PrismaAddressRepository implements IAddressesRepository {
         state,
         postalCode,
         userId,
+        created_at,
+        updated_at,
       },
     });
   }
@@ -45,6 +49,8 @@ export class PrismaAddressRepository implements IAddressesRepository {
         city: true,
         state: true,
         postalCode: true,
+        created_at: true,
+        updated_at: true,
       },
     });
 
@@ -63,7 +69,16 @@ export class PrismaAddressRepository implements IAddressesRepository {
 
   async update(
     id: string,
-    { name, address, address2, city, district, state, postalCode }: updateData
+    {
+      name,
+      address,
+      address2,
+      city,
+      district,
+      state,
+      postalCode,
+      updated_at,
+    }: updateData
   ): Promise<void> {
     await prisma.address.update({
       where: {
@@ -77,6 +92,7 @@ export class PrismaAddressRepository implements IAddressesRepository {
         district,
         state,
         postalCode,
+        updated_at,
       },
     });
   }

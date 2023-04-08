@@ -12,15 +12,15 @@ export async function authenticateToken(
   response: Response,
   next: NextFunction
 ) {
-  const token = request.header('Authorization')?.replace('Bearer ', '');
+  try {
+    const token = request.header('Authorization')?.replace('Bearer ', '');
 
-  if (!token) {
+    const decoded = jwt.verify(token as string, SECRET);
+
+    (request as CustomRequest).decoded = decoded;
+
+    next();
+  } catch (err) {
     return response.status(401).json(new TokenError({}));
   }
-
-  const decoded = jwt.verify(token, SECRET);
-
-  (request as CustomRequest).decoded = decoded;
-
-  next();
 }

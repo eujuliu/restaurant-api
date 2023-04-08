@@ -35,16 +35,15 @@ export class GetUserController {
           .json(responseOrError.value);
       }
 
-      if (!request.cookies.token) {
-        response.cookie('token', responseOrError.value, {
+      return response
+        .status(200)
+        .cookie('token', responseOrError.value, {
           secure: true,
           httpOnly: true,
           sameSite: 'lax',
           expires: returnADateSometimeAfter({ date: new Date(), hours: 12 }),
-        });
-      }
-
-      return response.status(200).send();
+        })
+        .send();
     } catch (err) {
       return response
         .status(500)
