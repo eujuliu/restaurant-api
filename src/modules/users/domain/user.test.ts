@@ -18,6 +18,8 @@ describe('Create a new user (entity)', () => {
 
     expect(userOrError.value).toBeInstanceOf(User);
     expect(userOrError.value).toHaveProperty('id');
+    expect(userOrError.value).toHaveProperty('createdAt');
+    expect(userOrError.value).toHaveProperty('updatedAt');
   });
 
   it('Should be not able to create a user with an invalid email', () => {

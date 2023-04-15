@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 
 describe('Create a new address (entity)', () => {
   it('Should be able to create an instance of Address', () => {
-    const address = Address.create({
+    const addressOrError = Address.create({
       name: 'Home',
       address: 'Av. Atlântica, 2266',
       address2: null,
@@ -15,11 +15,14 @@ describe('Create a new address (entity)', () => {
       userId: uuid(),
     });
 
-    expect(address.value).toHaveProperty('id');
+    expect(addressOrError.value).toBeInstanceOf(Address);
+    expect(addressOrError.value).toHaveProperty('id');
+    expect(addressOrError.value).toHaveProperty('createdAt');
+    expect(addressOrError.value).toHaveProperty('updatedAt');
   });
 
   it('Should be not able to create an instance of address with an invalid postal code', () => {
-    const address = Address.create({
+    const addressOrError = Address.create({
       name: 'Home',
       address: 'Av. Atlântica, 2266',
       address2: null,
@@ -30,6 +33,6 @@ describe('Create a new address (entity)', () => {
       userId: uuid(),
     });
 
-    expect(address.value).toStrictEqual(new PostalCodeInvalidError({}));
+    expect(addressOrError.value).toStrictEqual(new PostalCodeInvalidError({}));
   });
 });
