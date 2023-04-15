@@ -46,6 +46,26 @@ ACCESS_TOKEN_SECRET= the secret key for authentication
 
 after install postgresql and create `.env`, you need to run `npm run migrate:deploy`, for create the tables.
 
+## Running the project
+
+Now if you follow the instructions, you only need to run:
+
+```bash
+npm run dev
+```
+
+or with yarn
+
+```bash
+yarn dev
+```
+
+or with pnpm
+
+```bash
+pnpm run dev
+```
+
 ## Testing
 
 If you want to run the tests suits, first you need to run `npm run docker:up` for create the docker container and then run `npm run test`
