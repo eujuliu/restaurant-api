@@ -1,3 +1,4 @@
+import { ProductAlreadyExistsError } from 'modules/products/domain/errors';
 import { InMemoryProductsRepository } from 'modules/products/repositories/in-memory/in-memory-products-repository';
 import { IProductsRepository } from 'modules/products/repositories/products-repository';
 import {
@@ -28,7 +29,17 @@ describe('Create a new product (use case)', () => {
 
     const productExists = await productsRepository.exists(productData.name);
 
-    expect(productOrError).toBeNull();
+    expect(productOrError.value).toBeNull();
     expect(productExists).toBeTruthy();
+  });
+
+  it('Should be not able to create an existing product', async () => {
+    await createProductUseCase.execute(productData);
+
+    const productOrError = await createProductUseCase.execute(productData);
+
+    expect(productOrError.value).toStrictEqual(
+      new ProductAlreadyExistsError({})
+    );
   });
 });
