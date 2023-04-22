@@ -4,4 +4,5 @@ export interface IUsersRepository {
   exists(email: string): Promise<boolean>;
   findUserByEmail(email: string): Promise<PersistenceUser | null>;
   updatePassword(email: string, newPassword: string): Promise<void>;
+  count(): Promise<number>;
 }

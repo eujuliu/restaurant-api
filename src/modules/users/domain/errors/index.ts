@@ -63,3 +63,14 @@ export class PasswordsDoesNotMatchError extends BaseError {
     });
   }
 }
+
+export class InvalidPermissionsError extends BaseError {
+  constructor({ message, action, errorId, statusCode }: ErrorProps) {
+    super({
+      message: message || 'Invalid permissions',
+      action: action || 'This permissions is not allowed',
+      errorId: errorId || uuid(),
+      statusCode: statusCode || 400,
+    });
+  }
+}

@@ -26,4 +26,8 @@ export class InMemoryUsersRepository implements IUsersRepository {
       }
     });
   }
+
+  async count(): Promise<number> {
+    return this.users.length;
+  }
 }

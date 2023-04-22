@@ -9,6 +9,10 @@ import {
 import { IUsersRepository } from 'modules/users/repositories/users-repository';
 import { InternalServerError } from 'core/domain/errors';
 import { UserMap } from 'modules/users/mappers/user-map';
+import {
+  Permissions,
+  availablePermissions,
+} from 'modules/users/domain/permissions';
 
 export interface CreateUserRequest {
   firstName: string;
@@ -38,9 +42,23 @@ export class CreateUserUseCase
     phone,
   }: CreateUserRequest): Promise<CreateUserResponse> {
     const userAlreadyExists = await this.usersRepository.exists(email);
+    const count = await this.usersRepository.count();
+    const defaultPermissions: string[] = [
+      'product:list::available',
+      'payment:list::available',
+      'order:list::available',
+    ];
+    const permissionsOrError =
+      count >= 1
+        ? Permissions.create(defaultPermissions)
+        : Permissions.create([...availablePermissions]);
 
     if (userAlreadyExists) {
       return left(new AccountAlreadyExistsError({}));
+    }
+
+    if (permissionsOrError.isLeft()) {
+      return left(permissionsOrError.value);
     }
 
     const userOrError = User.create({
@@ -50,6 +68,7 @@ export class CreateUserUseCase
       password,
       phone,
       emailIsVerified: false,
+      permissions: permissionsOrError.value,
     });
 
     if (userOrError.isLeft()) {

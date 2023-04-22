@@ -20,8 +20,8 @@ model User {
   password        String
   phone           String    @db.VarChar(15)
   emailIsVerified Boolean   @default(false)
+  permissions     String[]
   addresses       Address[]
-  products        Product[]
 }
 
 model Address {
@@ -50,6 +50,4 @@ model Product {
   updated_at  String   @db.VarChar(25)
   images      String[]
   userId      String
-
-  User User @relation(fields: [userId], references: [id])
 }

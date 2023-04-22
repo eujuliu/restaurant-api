@@ -8,6 +8,7 @@ import {
   InsecurePasswordError,
   PhoneInvalidError,
 } from './errors';
+import { Permissions } from './permissions';
 
 interface UserDataProps {
   firstName: string;
@@ -15,6 +16,7 @@ interface UserDataProps {
   email: string;
   password: string;
   phone: string;
+  permissions: Permissions;
   emailIsVerified: boolean;
 }
 
@@ -26,6 +28,7 @@ export class User {
   readonly password: Password;
   readonly phone: Phone;
   readonly emailIsVerified: boolean;
+  readonly permissions: Permissions;
   readonly createdAt: string;
   readonly updatedAt: string;
 
@@ -37,6 +40,7 @@ export class User {
       password,
       phone,
       emailIsVerified,
+      permissions,
       createdAt,
       updatedAt,
     }: Omit<User, 'id'>,
@@ -52,6 +56,7 @@ export class User {
       emailIsVerified,
       createdAt,
       updatedAt,
+      permissions,
     });
   }
 
@@ -61,6 +66,7 @@ export class User {
     email,
     password,
     phone,
+    permissions,
     emailIsVerified,
   }: UserDataProps): Either<
     EmailInvalidError | InsecurePasswordError | PhoneInvalidError,
@@ -93,6 +99,7 @@ export class User {
         createdAt: new Date().toJSON(),
         updatedAt: new Date().toJSON(),
         emailIsVerified,
+        permissions,
       })
     );
   }

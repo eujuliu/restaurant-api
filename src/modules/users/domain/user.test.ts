@@ -1,11 +1,24 @@
+import { Either } from 'core/logic/either';
 import {
   EmailInvalidError,
   InsecurePasswordError,
+  InvalidPermissionsError,
   PhoneInvalidError,
 } from './errors';
+import { Permissions } from './permissions';
 import { User } from './user';
 
 describe('Create a new user (entity)', () => {
+  let permissionsOrError: Either<InvalidPermissionsError, Permissions>;
+
+  beforeAll(() => {
+    permissionsOrError = Permissions.create([
+      'product:list::available',
+      'payment:list::available',
+      'order:list::available',
+    ]);
+  });
+
   it('Should be able to create a user instance of User', () => {
     const userOrError = User.create({
       firstName: 'Alex',
@@ -14,6 +27,7 @@ describe('Create a new user (entity)', () => {
       password: '@Test123',
       phone: '(11) 98888-8888',
       emailIsVerified: false,
+      permissions: permissionsOrError.value as Permissions,
     });
 
     expect(userOrError.value).toBeInstanceOf(User);
@@ -31,6 +45,7 @@ describe('Create a new user (entity)', () => {
       password: '@Test123',
       phone: '(11) 98888-8888',
       emailIsVerified: false,
+      permissions: permissionsOrError.value as Permissions,
     });
 
     expect(userOrError.value).toStrictEqual(new EmailInvalidError({}));
@@ -44,6 +59,7 @@ describe('Create a new user (entity)', () => {
       password: '1234567',
       phone: '(11) 98888-8888',
       emailIsVerified: false,
+      permissions: permissionsOrError.value as Permissions,
     });
 
     expect(userOrError.value).toStrictEqual(new InsecurePasswordError({}));
@@ -57,6 +73,7 @@ describe('Create a new user (entity)', () => {
       password: '@Test123',
       phone: '(11) 8888-888',
       emailIsVerified: false,
+      permissions: permissionsOrError.value as Permissions,
     });
 
     expect(userOrError.value).toStrictEqual(new PhoneInvalidError({}));

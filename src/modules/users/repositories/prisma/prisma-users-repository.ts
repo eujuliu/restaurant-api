@@ -11,6 +11,7 @@ export class PrismaUsersRepository implements IUsersRepository {
     password,
     emailIsVerified,
     phone,
+    permissions,
     created_at,
     updated_at,
   }: PersistenceUser): Promise<void> {
@@ -23,6 +24,7 @@ export class PrismaUsersRepository implements IUsersRepository {
         password,
         emailIsVerified,
         phone,
+        permissions,
         created_at,
         updated_at,
       },
@@ -58,5 +60,11 @@ export class PrismaUsersRepository implements IUsersRepository {
         password: newPassword,
       },
     });
+  }
+
+  async count(): Promise<number> {
+    const count = await prisma.user.count();
+
+    return count;
   }
 }

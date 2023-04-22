@@ -9,6 +9,7 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "phone" VARCHAR(15) NOT NULL,
     "emailIsVerified" BOOLEAN NOT NULL DEFAULT false,
+    "permissions" TEXT[],
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
