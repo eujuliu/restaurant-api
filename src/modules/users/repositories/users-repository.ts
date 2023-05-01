@@ -5,4 +5,5 @@ export interface IUsersRepository {
   findUserByEmail(email: string): Promise<PersistenceUser | null>;
   updatePassword(email: string, newPassword: string): Promise<void>;
   count(): Promise<number>;
+  permissions(id: string): Promise<string[]>;
 }

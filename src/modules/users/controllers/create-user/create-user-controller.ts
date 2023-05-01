@@ -1,5 +1,5 @@
 import { InternalServerError, ValidationError } from 'core/domain/errors';
-import { bodyPropsIsEmpty } from 'core/domain/utils/body-props-is-empty';
+import { bodyPropsIsEmpty } from 'core/controller/utils/body-props-is-empty';
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from 'modules/users/use-cases/create-user/create-user-use-case';
 
@@ -40,7 +40,9 @@ export class CreateUserController {
           .json(responseOrError.value);
       }
 
-      return response.status(201).send();
+      return response.status(201).json({
+        message: `Welcome ${firstName} ${lastName}, please login to access your account`,
+      });
     } catch (err) {
       return response
         .status(500)

@@ -1,5 +1,5 @@
 import { InternalServerError, ValidationError } from 'core/domain/errors';
-import { bodyPropsIsEmpty } from 'core/domain/utils/body-props-is-empty';
+import { bodyPropsIsEmpty } from 'core/controller/utils/body-props-is-empty';
 import { Request, Response } from 'express';
 import { GetUserUseCase } from 'modules/users/use-cases/get-user/get-user-use-case';
 import { returnADateSometimeAfter } from '../utils/return-a-date-sometime-after';

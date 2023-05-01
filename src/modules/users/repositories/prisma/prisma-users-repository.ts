@@ -67,4 +67,21 @@ export class PrismaUsersRepository implements IUsersRepository {
 
     return count;
   }
+
+  async permissions(id: string): Promise<string[]> {
+    const permissions = await prisma.user
+      .findUnique({
+        where: {
+          id,
+        },
+        select: {
+          permissions: true,
+        },
+      })
+      .then((user) => {
+        return user?.permissions as string[];
+      });
+
+    return permissions;
+  }
 }

@@ -43,4 +43,10 @@ export class Permissions {
 
     return right(new Permissions(permissions));
   }
+
+  public has(permissions: string[]): boolean {
+    return permissions.every((permission) =>
+      this.permissions.includes(permission)
+    );
+  }
 }

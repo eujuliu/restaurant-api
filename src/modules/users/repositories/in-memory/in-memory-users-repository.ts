@@ -30,4 +30,11 @@ export class InMemoryUsersRepository implements IUsersRepository {
   async count(): Promise<number> {
     return this.users.length;
   }
+
+  async permissions(id: string): Promise<string[]> {
+    const permissions = this.users.find((user) => user.id === id)
+      ?.permissions as string[];
+
+    return permissions;
+  }
 }

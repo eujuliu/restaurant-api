@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { Response } from 'express';
 import { ChangePasswordUseCase } from 'modules/users/use-cases/change-password/change-password-use-case';
 import { InternalServerError, ValidationError } from 'core/domain/errors';
-import { bodyPropsIsEmpty } from 'core/domain/utils/body-props-is-empty';
+import { bodyPropsIsEmpty } from 'core/controller/utils/body-props-is-empty';
 import { CustomRequest } from 'infra/http/middleware/auth';
 
 export interface ChangePasswordBodyProps {
