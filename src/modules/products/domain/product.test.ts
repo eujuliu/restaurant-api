@@ -1,6 +1,7 @@
 import { ValidationError } from 'core/domain/errors';
 import { Product, ProductDataProps } from './product';
 import { InvalidImageUrlError } from './errors';
+import { v4 as uuid } from 'uuid';
 
 describe('Create a new product (entity)', () => {
   let productData: ProductDataProps;
@@ -13,6 +14,8 @@ describe('Create a new product (entity)', () => {
       price: 10.99,
       discount: 0,
       images: ['https://example.com/margherita.jpg'],
+      available: true,
+      createdBy: uuid(),
     };
   });
 
