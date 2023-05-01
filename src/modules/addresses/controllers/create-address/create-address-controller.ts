@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { InternalServerError, ValidationError } from 'core/domain/errors';
-import { bodyPropsIsEmpty } from 'core/domain/utils/body-props-is-empty';
+import { bodyPropsIsEmpty } from 'core/controller/utils/body-props-is-empty';
 import { CreateAddressUseCase } from 'modules/addresses/use-cases/create-address/create-address-use-case';
 import { CustomRequest } from 'infra/http/middleware/auth';
 
@@ -55,7 +55,9 @@ export class CreateAddressController {
           .json(responseOrError.value);
       }
 
-      return response.status(201).send();
+      return response.status(201).json({
+        message: `Address ${address} was created successfully`,
+      });
     } catch (err) {
       return response
         .status(500)

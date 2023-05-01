@@ -1,6 +1,16 @@
 # Create new user
 
-For create a new user, you need to do a `POST` request to `https://your-domain/v1/users` and pass the following data in the body:
+If you want to create a new user, you need to do a `POST` request to `https://your-domain/v1/users` and pass the following data in the body However, you need to follow some requirements for creating a new user.
+
+Requirements for the password:
+
+- Minimum 1 uppercase
+- Minimum 1 lowercase
+- Minimum length is 8
+- Minimum 1 number
+- Minimum 1 symbol
+
+Example:
 
 ```json
 {
@@ -12,15 +22,17 @@ For create a new user, you need to do a `POST` request to `https://your-domain/v
 }
 ```
 
-is obviously that you need to pass your data, not the data in the example.
-
-When you do the request, you can have a good result or an error message.
+When you do the request, you can receive a good response or an error message.
 
 ## Results
 
 ### Success
 
-If your data is correct, you should be able to create the new user and you get a `201` status code, don't have a body message.
+If your data is correct, you should be able to create the new user and you get a `201` status code and the response:
+
+```json
+"message": "Welcome John Due, please login to access your account"
+```
 
 ### Errors
 
@@ -28,15 +40,9 @@ Below you can see the default errors messages
 
 #### Weak password
 
-If you pass a weak password, you will get a `InsecurePasswordError`, you need to pass a password that follow the following pattern:
+If you pass a weak password that don't follow the requirement, you will get a `InsecurePasswordError` and `400` status code:
 
-- minimum 1 uppercase
-- minimum 1 lowercase
-- minimum length is 8
-- minimum 1 number
-- minimum 1 symbol
-
-Below is the `InsecurePasswordError` result, with `400` status code:
+Example response:
 
 ```json
 {

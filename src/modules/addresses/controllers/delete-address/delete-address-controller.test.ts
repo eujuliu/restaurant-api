@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 
 describe('DELETE /v1/address TEST1', () => {
   let token: string;
+
   beforeAll(async () => {
     await request(app).post('/v1/users').send({
       firstName: 'Julia',
@@ -13,12 +14,15 @@ describe('DELETE /v1/address TEST1', () => {
       phone: '(11) 98888-8888',
     });
 
-    const createJwt = await request(app).post('/v1/user').send({
-      email: 'julia@example.com',
-      password: '@Test123',
-    });
-
-    token = createJwt.get('Set-Cookie')[0].split('; ')[0].split('=')[1];
+    token = (
+      await request(app).post('/v1/user').send({
+        email: 'julia@example.com',
+        password: '@Test123',
+      })
+    )
+      .get('Set-Cookie')[0]
+      .split('; ')[0]
+      .split('=')[1];
 
     await request(app)
       .post('/v1/addresses')
@@ -33,6 +37,7 @@ describe('DELETE /v1/address TEST1', () => {
       })
       .set('Authorization', `Bearer ${token}`);
   });
+
   it('Should be able to delete an existing address', async () => {
     const addresses = await request(app)
       .get('/v1/addresses')

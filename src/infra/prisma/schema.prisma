@@ -22,6 +22,7 @@ model User {
   emailIsVerified Boolean   @default(false)
   permissions     String[]
   addresses       Address[]
+  products        Product[]
 }
 
 model Address {
@@ -42,12 +43,15 @@ model Address {
 
 model Product {
   id          String   @id
-  name        String   @db.VarChar(50)
+  name        String   @unique @db.VarChar(50)
   price       Float
   discount    Float?
   description String   @db.VarChar(600)
   created_at  String   @db.VarChar(25)
   updated_at  String   @db.VarChar(25)
   images      String[]
-  userId      String
+  available   Boolean
+  created_by  String
+
+  User User @relation(fields: [created_by], references: [id])
 }

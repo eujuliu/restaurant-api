@@ -1,5 +1,5 @@
 import { InternalServerError, ValidationError } from 'core/domain/errors';
-import { bodyPropsIsEmpty } from 'core/domain/utils/body-props-is-empty';
+import { bodyPropsIsEmpty } from 'core/controller/utils/body-props-is-empty';
 import { Request, Response } from 'express';
 import { UpdateAddressUseCase } from 'modules/addresses/use-cases/update-address/update-address-use-case';
 

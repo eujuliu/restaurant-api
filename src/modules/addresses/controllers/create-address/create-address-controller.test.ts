@@ -13,12 +13,12 @@ describe('POST /v1/addresses (controller)', () => {
   });
 
   it('Should be able to create a new address', async () => {
-    const getUserResponse = await request(app).post('/v1/user').send({
-      email: 'jennifer@example.com',
-      password: '@Test123',
-    });
-
-    const token = getUserResponse
+    const token = (
+      await request(app).post('/v1/user').send({
+        email: 'jennifer@example.com',
+        password: '@Test123',
+      })
+    )
       .get('Set-Cookie')[0]
       .split('; ')[0]
       .split('=')[1];
