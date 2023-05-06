@@ -29,14 +29,3 @@ export class InvalidImageUrlError extends BaseError {
     });
   }
 }
-
-export class PermissionsError extends BaseError {
-  constructor({ message, action, errorId, statusCode }: ErrorProps) {
-    super({
-      message: message || 'This user has no permissions to do this action',
-      action: action || 'Try with another user',
-      errorId: errorId || uuid(),
-      statusCode: statusCode || 401,
-    });
-  }
-}

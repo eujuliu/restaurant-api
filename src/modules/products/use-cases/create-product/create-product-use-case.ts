@@ -1,14 +1,12 @@
 import { UseCase } from 'core/domain/UseCase';
 import { InternalServerError } from 'core/domain/errors';
 import { Either, left, right } from 'core/logic/either';
-import {
-  PermissionsError,
-  ProductAlreadyExistsError,
-} from 'modules/products/domain/errors';
+import { ProductAlreadyExistsError } from 'modules/products/domain/errors';
 import { IProductsRepository } from 'modules/products/repositories/products-repository';
 import { Product } from 'modules/products/domain/product';
 import { IUsersRepository } from 'modules/users/repositories/users-repository';
 import { Permissions } from 'modules/users/domain/permissions';
+import { PermissionsError } from 'modules/users/domain/errors';
 
 export interface CreateProductRequest {
   userId: string;
