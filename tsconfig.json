@@ -11,6 +11,9 @@
     "sourceMap": true,
     "strictPropertyInitialization": false,
     "baseUrl": "src",
+    "paths": {
+      "@/*": [".src/*"]
+    },
     "moduleResolution": "node"
   }
 }

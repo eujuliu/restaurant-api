@@ -2,16 +2,6 @@ import { app } from 'infra/http/app';
 import request from 'supertest';
 
 describe('POST /v1/products (controller)', () => {
-  beforeAll(async () => {
-    await request(app).post('/v1/users').send({
-      email: 'janedoe@example.com',
-      firstName: 'Jane',
-      lastName: 'Doe',
-      password: 'Password1!',
-      phone: '1234567890',
-    });
-  });
-
   it('should create a new product', async () => {
     const token = (
       await request(app).post('/v1/user').send({
