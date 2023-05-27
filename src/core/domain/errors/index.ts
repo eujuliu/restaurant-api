@@ -32,8 +32,9 @@ export class BaseError extends Error {
 export class InternalServerError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || 'An Internal Server Error occurred',
-      action: action || 'Please contact the support',
+      message:
+        message || 'An internal server error occurred. Please try again later.',
+      action: action || 'Contact the system administrator',
       errorId: errorId,
       statusCode: statusCode || 500,
     });
@@ -43,8 +44,10 @@ export class InternalServerError extends BaseError {
 export class ValidationError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || 'A validation error occurred',
-      action: action || 'Change the data and try again',
+      message:
+        message ||
+        'Invalid input. Please provide valid data for the required fields.',
+      action: action || 'Perform the requested operation',
       errorId: errorId,
       statusCode: statusCode || 400,
     });
@@ -54,10 +57,25 @@ export class ValidationError extends BaseError {
 export class TokenError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || 'Invalid token',
-      action: action || 'If you are not authenticated, please authenticate',
+      message:
+        message ||
+        'Invalid token. Please provide a valid authentication token.',
+      action: action || 'Authenticate user',
       errorId: errorId,
-      statusCode: statusCode || 400,
+      statusCode: statusCode || 403,
+    });
+  }
+}
+
+export class UnauthorizedError extends BaseError {
+  constructor({ message, action, errorId, statusCode }: ErrorProps) {
+    super({
+      message:
+        message ||
+        'Access denied. You are not authorized to perform this action.',
+      action: action || 'View confidential data',
+      errorId: errorId,
+      statusCode: statusCode || 401,
     });
   }
 }
