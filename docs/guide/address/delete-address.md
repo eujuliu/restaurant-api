@@ -1,17 +1,17 @@
 # Delete an address
 
-If you want to delete an address, you need to do a `DELETE` request to `https://your-domain/v1/address` and send the ID of the address
+If you want to delete an address, you need to do a `DELETE` request to `https://your-domain/v1/address` with the `Authorization` header and the address ID.
+
+Example Authorization header:
+
+Authorization: Bearer `token` (the token are in the cookies)
+
+Example data:
 
 ```json
 {
   "id": "2112de33-7b56-4836-845c-14977c59d5ea"
 }
-```
-
-and the `Authorization` header, like this
-
-```
-Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJqb2huQGR1ZS5jb20iLCJpZCI6ImRkYzBiNjAwLWE2YTMtNDAwMS04MzM5LWIwZGUxYmFjYjlhMCIsImlhdCI6MTUxNjIzOTAyMn0.m7gxXwgh_OUE2lzU88Yx2pamGhfHCDjjIJgVIagbq8A
 ```
 
 ## Results

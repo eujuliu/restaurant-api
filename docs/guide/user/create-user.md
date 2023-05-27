@@ -1,6 +1,6 @@
 # Create new user
 
-If you want to create a new user, you need to do a `POST` request to `https://your-domain/v1/users` and pass the following data in the body However, you need to follow some requirements for creating a new user.
+If you want to create a new user, you need to do a `POST` request to `https://your-domain/v1/users` and pass the following data in the body.However, you need to follow some requirements for creating a new user.
 
 Requirements for the password:
 
@@ -10,7 +10,7 @@ Requirements for the password:
 - Minimum 1 number
 - Minimum 1 symbol
 
-Example:
+Example request body:
 
 ```json
 {
@@ -22,25 +22,40 @@ Example:
 }
 ```
 
-When you do the request, you can receive a good response or an error message.
+INFO: The first user that you have created have all the permissions:
+
+- product:list::all - See all products
+- product:list::available - See available products
+- product:delete - Delete a product
+- product:update - Update a product
+- product:add - Add a product
+- payment:list::all - See all payments
+- payment:list::available - See available payments (your own payments)
+- payment:refund - Refund a payment
+- order:list::all - See all orders
+- order:list::available - See available orders (your own orders)
+- order:update - Update an order
+- user:set - Set the user permissions in another user
+
+All users created after, only have `product:list::available`, `payment:list::available`, `order:list::available` permissions, you need to another permission you need to set with the first user.
 
 ## Results
 
 ### Success
 
-If your data is correct, you should be able to create the new user and you get a `201` status code and the response:
+If your data is correct, you should be able to create the new user and you get a `201 Created` status code and the response:
 
 ```json
-"message": "Welcome John Due, please login to access your account"
+{
+  "message": "Welcome John Due, please login to access your account"
+}
 ```
 
 ### Errors
 
-Below you can see the default errors messages
-
 #### Weak password
 
-If you pass a weak password that don't follow the requirement, you will get a `InsecurePasswordError` and `400` status code:
+If you pass a weak password that don't follow the requirement, you will get a `InsecurePasswordError` and `400 Bad Request` status code:
 
 Example response:
 
@@ -56,7 +71,9 @@ Example response:
 
 #### Email already registered
 
-If you pass an email address that is already registered, you will get the `AccountAlreadyExistsError` with the following message and status code `400`:
+If you pass an email address that is already registered, you will get the `AccountAlreadyExistsError` with the following message and status code `400 Bad Request`:
+
+Example response:
 
 ```json
 {

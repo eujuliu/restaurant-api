@@ -1,6 +1,7 @@
 import { Product } from 'modules/products/domain/product';
 import { IProductsRepository } from '../products-repository';
 import { prisma } from 'infra/prisma/client';
+import { Prisma } from '@prisma/client';
 
 export class PrismaProductsRepository implements IProductsRepository {
   async save({
@@ -39,5 +40,34 @@ export class PrismaProductsRepository implements IProductsRepository {
     });
 
     return !!product;
+  }
+
+  async index(
+    onlyAvailable: boolean,
+    limit?: number,
+    offset?: number
+  ): Promise<Product[]> {
+    const options: Prisma.ProductFindManyArgs = {
+      take: limit,
+      skip: offset,
+    };
+
+    const optionsWithWhere: Prisma.ProductFindManyArgs = {
+      ...options,
+      where: {
+        available: onlyAvailable,
+      },
+    };
+
+    const products = await prisma.product.findMany(
+      onlyAvailable ? optionsWithWhere : options
+    );
+
+    return products.map((product) => ({
+      ...product,
+      createdAt: product.created_at,
+      updatedAt: product.updated_at,
+      createdBy: product.created_by,
+    }));
   }
 }

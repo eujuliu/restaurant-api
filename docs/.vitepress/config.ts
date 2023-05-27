@@ -51,6 +51,15 @@ export default defineConfig({
               },
             ],
           },
+          {
+            text: 'Product',
+            items: [
+              {
+                text: 'Create a new product',
+                link: '/guide/product/create-product',
+              },
+            ],
+          },
         ],
       },
     ],

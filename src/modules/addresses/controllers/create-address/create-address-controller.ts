@@ -56,7 +56,7 @@ export class CreateAddressController {
       }
 
       return response.status(201).json({
-        message: `Address ${address} was created successfully`,
+        message: `Address '${address}' was created successfully`,
       });
     } catch (err) {
       return response

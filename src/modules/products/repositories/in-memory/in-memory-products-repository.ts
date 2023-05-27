@@ -13,4 +13,16 @@ export class InMemoryProductsRepository implements IProductsRepository {
 
     return !!product;
   }
+
+  async index(
+    onlyAvailable: boolean,
+    limit?: number | undefined,
+    offset?: number | undefined
+  ): Promise<Product[]> {
+    const products = this.products.filter((product) =>
+      onlyAvailable ? product.available : product
+    );
+
+    return products;
+  }
 }

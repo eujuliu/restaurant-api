@@ -1,6 +1,12 @@
 # Create new address
 
-For add a new address, you need to do a `POST`request to `https://your-domain/v1/addresses` with the following data.
+For add a new address, you need to do a `POST`request to `https://your-domain/v1/addresses` with the `Authorization` header and the data.
+
+Example Authorization header:
+
+Authorization: Bearer `token` (the token are in the cookies)
+
+Example data:
 
 ```json
 {
@@ -14,23 +20,23 @@ For add a new address, you need to do a `POST`request to `https://your-domain/v1
 }
 ```
 
-and you need to pass the `Authorization` header and this need to follow the format:
-
-```
-Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJqb2huQGR1ZS5jb20iLCJpZCI6ImRkYzBiNjAwLWE2YTMtNDAwMS04MzM5LWIwZGUxYmFjYjlhMCIsImlhdCI6MTUxNjIzOTAyMn0.m7gxXwgh_OUE2lzU88Yx2pamGhfHCDjjIJgVIagbq8A
-```
-
 ## Results
 
 ### Success
 
-If the address is valid, you will get a `201` status code without response data.
+If the address is valid, you will get a `201 Created` status code with the following response data:
+
+```json
+{
+  "message": "Address '20, Twentieth Street' was created successfully"
+}
+```
 
 ### Errors
 
 #### Address already registered
 
-If the address is already registered, you will get a `AddressAlreadyRegisteredError` and a `400` status code with the following response error.
+If the address is already registered, you will get a `AddressAlreadyRegisteredError` and a `400 Bad Request` status code with the following response error.
 
 ```json
 {
@@ -44,7 +50,7 @@ If the address is already registered, you will get a `AddressAlreadyRegisteredEr
 
 ### Postal code is invalid
 
-If the postal code is invalid, you will get a `PostalCodeInvalidError` and a `400` status code with the following response error.
+If the postal code is invalid, you will get a `PostalCodeInvalidError` and a `400 Bad Request` status code with the following response error.
 
 ```json
 {

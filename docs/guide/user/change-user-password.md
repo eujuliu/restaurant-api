@@ -1,34 +1,32 @@
 # Change user password
 
-For change some user password, you need to do a `PUT` request and pass two required things.
+If you want to change the user password, you need to do a `PUT` request to `https://your-domain/v1/user/security` with the `Authorization` header and the old password and new password in the body like this:
 
-First, you need to pass the following data:
+Example Authorization header:
+
+Authorization: Bearer `token` (the token are in the cookies)
+
+Example body:
 
 ```json
 {
-  "oldPassword": "!Test1234",
-  "newPassword": "!Test4321",
+  "oldPassword": "!Test43210",
+  "newPassword": "!Test43221",
   "confirmNewPassword": "!Test4321"
 }
-```
-
-and second, you need to pass a header called `Authorization` with the following format:
-
-```
-Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJqb2huQGR1ZS5jb20iLCJpZCI6ImRkYzBiNjAwLWE2YTMtNDAwMS04MzM5LWIwZGUxYmFjYjlhMCIsImlhdCI6MTUxNjIzOTAyMn0.m7gxXwgh_OUE2lzU88Yx2pamGhfHCDjjIJgVIagbq8A
 ```
 
 ## Results
 
 ### Success
 
-If you follow the instructions correctly, you will receive a `200` status code without body message.
+If you follow the instructions correctly, you will receive a `200 OK` status code without body message.
 
 ### Error
 
 #### Old password is wrong
 
-If the old password is incorrect, you will receive a `ValidationError` error and `400` status code with the following error message:
+If the old password is incorrect, you will receive a `ValidationError` error and `400 Bad Request` status code with the following error message:
 
 ```json
 {
@@ -42,7 +40,7 @@ If the old password is incorrect, you will receive a `ValidationError` error and
 
 #### New password is weak
 
-If the new password is weak, you will get a `InsecurePasswordError` error and `400` status code with the following error message:
+If the new password is weak, you will get a `InsecurePasswordError` error and `400 Bad Request` status code with the following error message:
 
 ```json
 {
@@ -56,7 +54,7 @@ If the new password is weak, you will get a `InsecurePasswordError` error and `4
 
 #### The new passwords don't match
 
-If the new password does not match, you will get a `PasswordsDoesNotMatchError` and `400` status code with the following error message:
+If the new password does not match, you will get a `PasswordsDoesNotMatchError` and `400 Bad Request` status code with the following error message:
 
 ```json
 {

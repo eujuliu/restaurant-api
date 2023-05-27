@@ -1,6 +1,8 @@
 # Update address
 
-For update an address you need to do a `POST` request to `https://your-domain/v1/address` and pass the following data:
+For update an address you need to do a `POST` request to `https://your-domain/v1/address` with the `Authorization` header and the address ID and the new data.
+
+Example data:
 
 ```json
 {
@@ -15,23 +17,21 @@ For update an address you need to do a `POST` request to `https://your-domain/v1
 }
 ```
 
-and you need to pass the `Authorization` header, like this:
+Example Authorization header:
 
-```
-Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZW1haWwiOiJqb2huQGR1ZS5jb20iLCJpZCI6ImRkYzBiNjAwLWE2YTMtNDAwMS04MzM5LWIwZGUxYmFjYjlhMCIsImlhdCI6MTUxNjIzOTAyMn0.m7gxXwgh_OUE2lzU88Yx2pamGhfHCDjjIJgVIagbq8A
-```
+Authorization: Bearer `token` (the token are in the cookies)
 
 ## Results
 
 ### Success
 
-If you send the correctly data, you will receive a `200` status code without response data.
+If you send the correctly data, you will receive a `200 OK` status code without response data.
 
 ### Errors
 
 #### Wrong ID
 
-If you send the wrong ID, you will receive a `ValidationError` and `400` status code with the following error message.
+If you send the wrong ID, you will receive a `ValidationError` and `400 Bad Request` status code with the following error message.
 
 ```json
 {
