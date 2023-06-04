@@ -58,6 +58,10 @@ export default defineConfig({
                 text: 'Create a new product',
                 link: '/guide/product/create-product',
               },
+              {
+                text: 'Get product list',
+                link: '/guide/product/get-products',
+              },
             ],
           },
         ],
