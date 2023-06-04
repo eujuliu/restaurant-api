@@ -7,5 +7,5 @@ export interface IProductsRepository {
     onlyAvailable: boolean,
     limit?: number,
     offset?: number
-  ): Promise<Product[]>;
+  ): Promise<Omit<Product, 'createdBy'>[]>;
 }

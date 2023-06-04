@@ -46,7 +46,7 @@ export class PrismaProductsRepository implements IProductsRepository {
     onlyAvailable: boolean,
     limit?: number,
     offset?: number
-  ): Promise<Product[]> {
+  ): Promise<Omit<Product, 'createdBy'>[]> {
     const options: Prisma.ProductFindManyArgs = {
       take: limit,
       skip: offset,
@@ -65,9 +65,11 @@ export class PrismaProductsRepository implements IProductsRepository {
 
     return products.map((product) => ({
       ...product,
+      created_at: undefined,
+      updated_at: undefined,
+      created_by: undefined,
       createdAt: product.created_at,
       updatedAt: product.updated_at,
-      createdBy: product.created_by,
     }));
   }
 }
