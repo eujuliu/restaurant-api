@@ -11,10 +11,10 @@ interface ErrorProps {
 export class ProductAlreadyExistsError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || `This product already exists.`,
-      action: action || 'If is an another product try change the name.',
+      message: message || `A product with the same identifier already exists.`,
+      action: action || 'Choose a unique product identifier',
       errorId: errorId || uuid(),
-      statusCode: statusCode || 400,
+      statusCode: statusCode || 409,
     });
   }
 }
@@ -22,10 +22,10 @@ export class ProductAlreadyExistsError extends BaseError {
 export class InvalidImageUrlError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || `This url is not valid`,
-      action: action || 'Try another url image.',
+      message: message || `Invalid image URL provided for the product.`,
+      action: action || 'Provide a valid image URL',
       errorId: errorId || uuid(),
-      statusCode: statusCode || 400,
+      statusCode: statusCode || 422,
     });
   }
 }
