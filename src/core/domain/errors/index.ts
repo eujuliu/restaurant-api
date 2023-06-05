@@ -32,8 +32,7 @@ export class BaseError extends Error {
 export class InternalServerError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message:
-        message || 'An internal server error occurred. Please try again later.',
+      message: message || 'An internal server error occurred.',
       action: action || 'Contact the system administrator',
       errorId: errorId,
       statusCode: statusCode || 500,
@@ -44,12 +43,10 @@ export class InternalServerError extends BaseError {
 export class ValidationError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message:
-        message ||
-        'Invalid input. Please provide valid data for the required fields.',
-      action: action || 'Perform the requested operation',
+      message: message || 'Validation failed for the request.',
+      action: action || 'Correct the input fields and try again',
       errorId: errorId,
-      statusCode: statusCode || 400,
+      statusCode: statusCode || 422,
     });
   }
 }
@@ -57,12 +54,10 @@ export class ValidationError extends BaseError {
 export class TokenError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message:
-        message ||
-        'Invalid token. Please provide a valid authentication token.',
-      action: action || 'Authenticate user',
+      message: message || 'Invalid or expired token.',
+      action: action || 'Generate a new token and try again',
       errorId: errorId,
-      statusCode: statusCode || 403,
+      statusCode: statusCode || 401,
     });
   }
 }
@@ -70,10 +65,8 @@ export class TokenError extends BaseError {
 export class UnauthorizedError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message:
-        message ||
-        'Access denied. You are not authorized to perform this action.',
-      action: action || 'View confidential data',
+      message: message || 'Unauthorized access.',
+      action: action || 'Please authenticate and provide valid credentials',
       errorId: errorId,
       statusCode: statusCode || 401,
     });

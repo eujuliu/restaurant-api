@@ -11,8 +11,8 @@ interface ErrorProps {
 export class EmailInvalidError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || `This email is not valid.`,
-      action: action || 'Verify the data and try again',
+      message: message || `Invalid email format.`,
+      action: action || 'Please provide a valid email address',
       errorId: errorId || uuid(),
       statusCode: statusCode || 400,
     });
@@ -22,8 +22,8 @@ export class EmailInvalidError extends BaseError {
 export class PhoneInvalidError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || `This phone number is not valid.`,
-      action: action || 'Verify the data and try again',
+      message: message || `Invalid phone number format.`,
+      action: action || 'Please provide a valid phone number',
       errorId: errorId || uuid(),
       statusCode: statusCode || 400,
     });
@@ -33,10 +33,10 @@ export class PhoneInvalidError extends BaseError {
 export class InsecurePasswordError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || 'This password is not secure.',
-      action: action || 'Try another password',
+      message: message || 'The password does not meet security requirements.',
+      action: action || 'Please choose a stronger password',
       errorId: errorId || uuid(),
-      statusCode: statusCode || 400,
+      statusCode: statusCode || 422,
     });
   }
 }
@@ -45,10 +45,10 @@ export class AccountAlreadyExistsError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
       message:
-        message || `Already exists a user registered with this email address`,
-      action: action || 'If is you, try logging',
+        message || `An account with the same credentials already exists.`,
+      action: action || 'Please use a different email',
       errorId: errorId || uuid(),
-      statusCode: statusCode || 400,
+      statusCode: statusCode || 409,
     });
   }
 }
@@ -56,8 +56,8 @@ export class AccountAlreadyExistsError extends BaseError {
 export class PasswordsDoesNotMatchError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || 'Passwords does not match',
-      action: action || 'Re-write the passwords and try again',
+      message: message || 'The passwords provided do not match.',
+      action: action || 'Please ensure both passwords are identical',
       errorId: errorId || uuid(),
       statusCode: statusCode || 400,
     });
@@ -67,10 +67,11 @@ export class PasswordsDoesNotMatchError extends BaseError {
 export class InvalidPermissionsError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || 'Invalid permissions',
-      action: action || 'This permissions is not allowed',
+      message:
+        message || 'Invalid permissions to perform the requested action.',
+      action: action || 'Please contact an administrator for assistance',
       errorId: errorId || uuid(),
-      statusCode: statusCode || 400,
+      statusCode: statusCode || 403,
     });
   }
 }
@@ -78,10 +79,13 @@ export class InvalidPermissionsError extends BaseError {
 export class PermissionsError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || 'This user has no permissions to do this action',
-      action: action || 'Try with another user',
+      message:
+        message || 'Insufficient permissions to perform the requested action.',
+      action:
+        action ||
+        'Please request appropriate permissions from an administrator',
       errorId: errorId || uuid(),
-      statusCode: statusCode || 401,
+      statusCode: statusCode || 403,
     });
   }
 }

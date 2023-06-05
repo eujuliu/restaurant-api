@@ -10,8 +10,8 @@ interface ErrorProps {
 export class PostalCodeInvalidError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || `This postal code is not valid.`,
-      action: action || 'Verify the data and try again',
+      message: message || `Invalid postal code format.`,
+      action: action || 'Please provide a valid postal code',
       errorId: errorId,
       statusCode: statusCode || 400,
     });
@@ -21,10 +21,10 @@ export class PostalCodeInvalidError extends BaseError {
 export class AddressAlreadyRegisteredError extends BaseError {
   constructor({ message, action, errorId, statusCode }: ErrorProps) {
     super({
-      message: message || `This address is already registered`,
-      action: action || 'Try another address',
+      message: message || `The address is already registered.`,
+      action: action || 'Please provide a different address',
       errorId: errorId,
-      statusCode: statusCode || 400,
+      statusCode: statusCode || 409,
     });
   }
 }

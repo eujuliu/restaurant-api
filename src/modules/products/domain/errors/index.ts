@@ -29,3 +29,14 @@ export class InvalidImageUrlError extends BaseError {
     });
   }
 }
+
+export class ProductNotFoundError extends BaseError {
+  constructor({ message, action, errorId, statusCode }: ErrorProps) {
+    super({
+      message: message || 'The requested product could not be found.',
+      action: action || 'Check the product identifier and try again',
+      errorId: errorId || uuid(),
+      statusCode: statusCode || 404,
+    });
+  }
+}
