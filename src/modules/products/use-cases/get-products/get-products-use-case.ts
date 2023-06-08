@@ -12,7 +12,10 @@ export interface GetProductsRequest {
   offset?: number;
 }
 
-export type GetProductsResponse = Either<UnauthorizedError, Product[]>;
+export type GetProductsResponse = Either<
+  UnauthorizedError,
+  Omit<Product, 'createdBy'>[]
+>;
 
 export class GetProductsUseCase
   implements UseCase<GetProductsRequest, GetProductsResponse>
@@ -30,7 +33,7 @@ export class GetProductsUseCase
     const permissions = new Permissions(
       await this.usersRepository.permissions(userId)
     );
-    const products: Product[] = [];
+    const products: Omit<Product, 'createdBy'>[] = [];
 
     if (!permissions.has(['product:list::all', 'product:list::available'])) {
       return left(new UnauthorizedError({}));
