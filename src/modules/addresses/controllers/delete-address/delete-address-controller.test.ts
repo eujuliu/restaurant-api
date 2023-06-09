@@ -61,6 +61,6 @@ describe('DELETE /v1/address TEST1', () => {
       })
       .set('Authorization', `Bearer ${token}`);
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(422);
   });
 });

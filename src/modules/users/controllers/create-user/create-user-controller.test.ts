@@ -26,9 +26,9 @@ describe('POST /v1/users (controller)', () => {
 
     const response = await request(app).post('/v1/users').send(userData);
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(409);
     expect(response.body.message).toStrictEqual(
-      'Already exists a user registered with this email address'
+      'An account with the same credentials already exists.'
     );
   });
 });

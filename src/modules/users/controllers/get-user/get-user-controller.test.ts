@@ -25,6 +25,6 @@ describe('GET /v1/user (controller)', () => {
       password: '@Test123',
     });
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(422);
   });
 });

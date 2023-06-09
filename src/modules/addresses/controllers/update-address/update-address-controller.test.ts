@@ -61,6 +61,6 @@ describe('PUT /v1/address (controller)', () => {
       })
       .set('Authorization', `Bearer ${token}`);
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(422);
   });
 });

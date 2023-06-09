@@ -50,7 +50,7 @@ describe('PUT /v1/user/security (controller)', () => {
       })
       .set('Authorization', `Bearer ${token}`);
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(422);
   });
 
   it('Should be not able to change the password, if the session_id does not exist', async () => {
