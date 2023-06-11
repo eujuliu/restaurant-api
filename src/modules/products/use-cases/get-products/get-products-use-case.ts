@@ -39,6 +39,8 @@ export class GetProductsUseCase
       return left(new UnauthorizedError({}));
     }
 
+    if (limit && !offset) offset = 0;
+
     if (permissions.has(['product:list::all'])) {
       products.push(
         ...(await this.productsRepository.index(false, limit, offset))

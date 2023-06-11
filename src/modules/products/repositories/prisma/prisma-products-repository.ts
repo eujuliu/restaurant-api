@@ -42,14 +42,35 @@ export class PrismaProductsRepository implements IProductsRepository {
     return !!product;
   }
 
+  async findProductsById(
+    criteria: string[]
+  ): Promise<Omit<Product, 'createdBy'>[]> {
+    const products = await prisma.product.findMany({
+      where: {
+        id: {
+          in: criteria,
+        },
+      },
+    });
+
+    return products.map((product) => ({
+      ...product,
+      created_by: undefined,
+      created_at: undefined,
+      updated_at: undefined,
+      createdAt: product.created_at,
+      updatedAt: product.updated_at,
+    }));
+  }
+
   async index(
     onlyAvailable: boolean,
     limit?: number,
     offset?: number
   ): Promise<Omit<Product, 'createdBy'>[]> {
     const options: Prisma.ProductFindManyArgs = {
-      take: limit,
-      skip: offset,
+      take: Number(limit) || undefined,
+      skip: Number(offset) || undefined,
     };
 
     const optionsWithWhere: Prisma.ProductFindManyArgs = {
@@ -71,5 +92,15 @@ export class PrismaProductsRepository implements IProductsRepository {
       createdAt: product.created_at,
       updatedAt: product.updated_at,
     }));
+  }
+
+  async delete(criteria: string[]): Promise<void> {
+    await prisma.product.deleteMany({
+      where: {
+        id: {
+          in: criteria,
+        },
+      },
+    });
   }
 }

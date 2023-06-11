@@ -14,15 +14,32 @@ export class InMemoryProductsRepository implements IProductsRepository {
     return !!product;
   }
 
+  async findProductsById(
+    criteria: string[]
+  ): Promise<Omit<Product, 'createdBy'>[]> {
+    const products = this.products
+      .filter((product) => criteria.includes(product.id))
+      .map((product) => ({ ...product, createdBy: undefined }));
+
+    return products;
+  }
+
   async index(
     onlyAvailable: boolean,
     limit?: number | undefined,
     offset?: number | undefined
-  ): Promise<Product[]> {
-    const products = this.products.filter((product) =>
-      onlyAvailable ? product.available : product
-    );
+  ): Promise<Omit<Product, 'createdBy'>[]> {
+    const products = this.products
+      .filter((product) => (onlyAvailable ? product.available : product))
+      .map((product) => ({
+        ...product,
+        createdBy: undefined,
+      }));
 
     return products;
+  }
+
+  async delete(criteria: string[]): Promise<void> {
+    this.products = this.products.filter(({ id }) => !criteria.includes(id));
   }
 }
