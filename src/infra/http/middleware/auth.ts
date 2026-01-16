@@ -13,8 +13,9 @@ export async function authenticateToken(
   next: NextFunction
 ) {
   try {
-    const token = request.header('Authorization')?.replace('Bearer ', '');
+    // const token = request.header('Authorization')?.replace('Bearer ', '');
 
+    const token = request.cookies.token;
     const decoded = jwt.verify(token as string, SECRET);
 
     (request as CustomRequest).decoded = decoded;

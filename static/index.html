@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flavor Hub - Restaurant Management</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+        </span>
+        <span class="logo-text">Flavor Hub</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <span class="nav-section-title">Main</span>
+        <a href="#" class="nav-item active" data-page="dashboard">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section-title">Management</span>
+        <a href="#" class="nav-item" data-page="products">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span>Products</span>
+        </a>
+        <a href="#" class="nav-item" data-page="addresses">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span>Addresses</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-section-title">Account</span>
+        <a href="#" class="nav-item" data-page="profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span>Profile</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" id="logoutBtn" style="display: none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+        </svg>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="header">
+      <button class="menu-toggle" id="menuToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+      <div class="header-title">
+        <h1 id="pageTitle">Dashboard</h1>
+        <p class="header-subtitle" id="pageSubtitle">
+          Welcome back! Here's what's happening.
+        </p>
+      </div>
+      <div class="header-actions">
+        <div class="auth-buttons" id="authButtons">
+          <button class="btn btn-outline" id="loginBtn">Login</button>
+          <button class="btn btn-primary" id="registerBtn">Register</button>
+        </div>
+        <div class="user-menu" id="userMenu">
+          <div class="user-avatar" id="userAvatar">JD</div>
+          <span class="user-name" id="userName">John Doe</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content" id="content">
+      <section class="page active" id="dashboardPage">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon products">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="totalProducts">0</span>
+              <span class="stat-label">Total Products</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon addresses">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="totalAddresses">0</span>
+              <span class="stat-label">Addresses</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon available">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="availableProducts">0</span>
+              <span class="stat-label">Available</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon unavailable">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="unavailableProducts">0</span>
+              <span class="stat-label">Unavailable</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card recent-products">
+            <div class="card-header">
+              <h3>Recent Products</h3>
+              <button class="btn btn-text" data-page="products">
+                View All
+              </button>
+            </div>
+            <div class="card-content">
+              <div class="product-list" id="recentProductsList">
+                <div class="empty-state">
+                  <p>No products yet</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card quick-actions">
+            <div class="card-header">
+              <h3>Quick Actions</h3>
+            </div>
+            <div class="card-content">
+              <div class="action-buttons">
+                <button class="action-btn" data-action="addProduct">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                  <span>Add Product</span>
+                </button>
+                <button class="action-btn" data-action="addAddress">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span>Add Address</span>
+                </button>
+                <button class="action-btn" data-action="changePassword">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                  <span>Change Password</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="productsPage">
+        <div class="page-header">
+          <div class="search-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" placeholder="Search products..." id="productSearch" />
+          </div>
+          <button class="btn btn-primary" id="addProductBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            <span>Add Product</span>
+          </button>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+          <div class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <h3>No Products Yet</h3>
+            <p>Start by adding your first product</p>
+            <button class="btn btn-primary" id="emptyAddProductBtn">
+              Add Product
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="addressesPage">
+        <div class="page-header">
+          <div class="search-bar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" placeholder="Search addresses..." id="addressSearch" />
+          </div>
+          <button class="btn btn-primary" id="addAddressBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            <span>Add Address</span>
+          </button>
+        </div>
+
+        <div class="addresses-grid" id="addressesGrid">
+          <div class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <h3>No Addresses Yet</h3>
+            <p>Add your first delivery address</p>
+            <button class="btn btn-primary" id="emptyAddAddressBtn">
+              Add Address
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="profilePage">
+        <div class="profile-container">
+          <div class="card profile-card">
+            <div class="profile-header">
+              <div class="profile-avatar" id="profileAvatar">None</div>
+              <div class="profile-info">
+                <h2 id="profileName">None</h2>
+                <p id="profileEmail">None</p>
+              </div>
+            </div>
+            <div class="profile-details">
+              <div class="detail-item">
+                <span class="detail-label">Phone</span>
+                <span class="detail-value" id="profilePhone">None</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Member Since</span>
+                <span class="detail-value" id="profileCreated">None</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Email Verified</span>
+                <span class="detail-value" id="profileVerified">
+                  <span class="badge badge-warning">None</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="security-container">
+          <div class="card">
+            <div class="card-header">
+              <h3>Change Password</h3>
+            </div>
+            <div class="card-content">
+              <form id="changePasswordForm" class="form">
+                <div class="form-group">
+                  <label for="currentPassword">Current Password</label>
+                  <div class="input-wrapper">
+                    <input type="password" id="currentPassword" placeholder="Enter current password" required />
+                    <button type="button" class="toggle-password" data-target="currentPassword">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="eye-icon">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="newPassword">New Password</label>
+                  <div class="input-wrapper">
+                    <input type="password" id="newPassword" placeholder="Enter new password" required />
+                    <button type="button" class="toggle-password" data-target="newPassword">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="eye-icon">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm New Password</label>
+                  <div class="input-wrapper">
+                    <input type="password" id="confirmPassword" placeholder="Confirm new password" required />
+                    <button type="button" class="toggle-password" data-target="confirmPassword">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="eye-icon">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                  Update Password
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="authModal">
+    <div class="modal auth-modal">
+      <div class="auth-container">
+        <div class="auth-header">
+          <div class="logo">
+            <span class="logo-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </span>
+          </div>
+          <h2 class="auth-title" id="authTitle">Welcome Back</h2>
+          <p class="auth-subtitle" id="authSubtitle">
+            Sign in to your account
+          </p>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="Enter your email" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="loginPassword" placeholder="Enter your password" required />
+              <button type="button" class="toggle-password" data-target="loginPassword">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="eye-icon">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            Sign In
+          </button>
+        </form>
+
+        <form id="registerForm" class="auth-form hidden">
+          <div class="form-group">
+            <label for="registerFirstName">First Name</label>
+            <input type="text" id="registerFirstName" placeholder="John" required />
+          </div>
+          <div class="form-group">
+            <label for="registerLastName">Last Name</label>
+            <input type="text" id="registerLastName" placeholder="Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <input type="email" id="registerEmail" placeholder="john@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="registerPhone">Phone</label>
+            <input type="tel" id="registerPhone" placeholder="+1 234 567 8900" required />
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="registerPassword" placeholder="Create a password" required />
+              <button type="button" class="toggle-password" data-target="registerPassword">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="eye-icon">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            Create Account
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          <p id="authToggleText">Don't have an account?</p>
+          <button type="button" class="btn btn-text" id="authToggleBtn">
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="productModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="productModalTitle">Add Product</h3>
+        <button class="modal-close" data-modal="productModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-content">
+        <form id="productForm" class="form">
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" placeholder="e.g., Margherita Pizza" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="productPrice">Price ($)</label>
+              <input type="number" id="productPrice" placeholder="0.00" step="0.01" min="0" required />
+            </div>
+            <div class="form-group">
+              <label for="productDiscount">Discount (%)</label>
+              <input type="number" id="productDiscount" placeholder="0" step="1" min="0" max="100" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="productDescription">Description</label>
+            <textarea id="productDescription" placeholder="Describe your product..." rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="productImages">Image URLs (comma separated)</label>
+            <input type="text" id="productImages" placeholder="https://example.com/image1.jpg, https://..." />
+          </div>
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="productAvailable" checked />
+              <span class="checkmark"></span>
+              <span>Available for sale</span>
+            </label>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" data-modal="productModal">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Save Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="addressModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="addressModalTitle">Add Address</h3>
+        <button class="modal-close" data-modal="addressModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-content">
+        <form id="addressForm" class="form">
+          <input type="hidden" id="addressId" />
+          <div class="form-group">
+            <label for="addressName">Label</label>
+            <input type="text" id="addressName" placeholder="e.g., Home, Office" required maxlength="15" />
+          </div>
+          <div class="form-group">
+            <label for="addressStreet">Address</label>
+            <input type="text" id="addressStreet" placeholder="Street address" required maxlength="50" />
+          </div>
+          <div class="form-group">
+            <label for="addressStreet2">Address Line 2 (Optional)</label>
+            <input type="text" id="addressStreet2" placeholder="Apartment, suite, etc." maxlength="45" />
+          </div>
+          <div class="form-group">
+            <label for="addressCity">City</label>
+            <input type="text" id="addressCity" placeholder="City" required maxlength="35" />
+          </div>
+          <div class="form-group">
+            <label for="addressState">State</label>
+            <input type="text" id="addressState" placeholder="ST" maxlength="2" />
+          </div>
+          <div class="form-group">
+            <label for="addressDistrict">District (Optional)</label>
+            <input type="text" id="addressDistrict" placeholder="District" maxlength="50" />
+          </div>
+          <div class="form-group">
+            <label for="addressPostalCode">Postal Code</label>
+            <input type="text" id="addressPostalCode" placeholder="12345" required maxlength="15" />
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" data-modal="addressModal">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Save Address
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
+  <script defer src="js/components.js"></script>
+  <script defer src="js/app.js"></script>
+</body>
+
+</html>

@@ -5,6 +5,9 @@ import { userRouter } from 'modules/users/infra/http/routes';
 
 const router = Router();
 
+router.get('ping', (request, response) => {
+  response.send('pong');
+});
 router.use(userRouter);
 router.use(addressRouter);
 router.use(productRouter);
